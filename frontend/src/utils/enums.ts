@@ -1,0 +1,7 @@
+export enum ErrorCode {
+    UNAUTHORIZED = 'UNAUTHORIZED',
+    VALIDATION = 'VALIDATION',
+    NETWORK = 'NETWORK',
+    TIMEOUT = 'TIMEOUT',
+    UNKNOWN = 'UNKNOWN',
+}

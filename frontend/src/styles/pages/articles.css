@@ -1,0 +1,112 @@
+/* =========================================
+   Articles / Knowledge Base
+   ========================================= */
+
+/* ==================== DRAG & DROP KB REORDER ==================== */
+.kb-drag-row {
+    transition:
+        opacity 0.2s,
+        background 0.2s,
+        box-shadow 0.2s;
+}
+.kb-drag-row:hover .kb-drag-handle {
+    color: var(--color-primary) !important;
+}
+.kb-dragging {
+    opacity: 0.4;
+}
+.kb-drag-over {
+    background: var(--color-primary-bg-subtle) !important;
+    box-shadow: inset 0 -2px 0 0 var(--color-primary);
+}
+
+/* ==================== KNOWLEDGE BASE ARTICLE CARDS ==================== */
+.kb-article-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.kb-article-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--color-primary), var(--color-primary));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.kb-article-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-border-hover);
+}
+
+.kb-article-card:hover::before {
+    opacity: 1;
+}
+
+.kb-article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.kb-article-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.kb-article-date {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.kb-article-title {
+    color: var(--color-text-heading);
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 var(--space-md) 0;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.kb-article-content {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    line-height: 1.75;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .kb-article-card {
+        padding: 18px;
+    }
+
+    .kb-article-title {
+        font-size: 16px;
+    }
+
+    .kb-article-content {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    #kb-search-client {
+        max-width: 100% !important;
+    }
+}

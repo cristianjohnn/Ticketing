@@ -1,67 +1,96 @@
 import './style.css';
-import { store } from './state/store';
-import { Router } from './router/router';
-import { NavbarComponent } from './components/Navbar';
-import { SidebarComponent } from './components/Sidebar';
-import { ModalsComponent } from './components/Modals';
-import { LoginPage } from './pages/Login';
-import { DashboardPage } from './pages/Dashboard';
-import { TicketsPage } from './pages/Tickets';
-import { CreateTicketPage } from './pages/CreateTicket';
+
+import { cleanupServiceWorkers } from './bootstrap/serviceWorkerCleanup';
+import { BackgroundRenderer } from './components/background/BackgroundRenderer';
+import { SplashManager } from './components/common/SplashManager';
+import { ThemeManager } from './components/common/theme/ThemeManager';
+import { ModalsManager } from './components/modals/ModalsManager';
+import { AdminLayout } from './layouts/AdminLayout';
+import { ClientLayout } from './layouts/ClientLayout';
+import { LayoutManager } from './layouts/LayoutManager';
+import { LoginLayout } from './layouts/LoginLayout';
+import { SupportLayout } from './layouts/SupportLayout';
 import { ArticlesPage } from './pages/Articles';
-import { StatisticsPage } from './pages/Statistics';
-import { AdminPage } from './pages/Admin';
+import { CreateTicketPage } from './pages/CreateTicket';
+import { LoginPage } from './pages/Login';
+import { Router } from './router/router';
+import { store } from './state/store';
 
 class App {
     public static init(): void {
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize global navbar, sidebar, and modals listeners
-            NavbarComponent.init();
-            SidebarComponent.init();
-            ModalsComponent.initModalCloseListeners();
+            // Initialize foundational modules
+            cleanupServiceWorkers();
+            ThemeManager.initialize();
+            BackgroundRenderer.init();
+            
+            // Ensure splash is visible
+            SplashManager.show();
 
-            // Initialize Page Handlers
+            // Setup Layouts
+            const legacyLogin = document.getElementById('login-screen');
+            if (legacyLogin) {
+                LayoutManager.login = new LoginLayout();
+                legacyLogin.replaceWith(LayoutManager.login.getElement());
+            }
+
+            const legacyClient = document.getElementById('client-screen');
+            if (legacyClient) {
+                LayoutManager.client = new ClientLayout();
+                legacyClient.replaceWith(LayoutManager.client.getElement());
+            }
+
+            const legacyAdmin = document.getElementById('admin-screen');
+            if (legacyAdmin) {
+                LayoutManager.admin = new AdminLayout();
+                legacyAdmin.replaceWith(LayoutManager.admin.getElement());
+            }
+
+            const legacySupport = document.getElementById('support-screen');
+            if (legacySupport) {
+                LayoutManager.support = new SupportLayout();
+                legacySupport.replaceWith(LayoutManager.support.getElement());
+            }
+
+            ModalsManager.initializeModals();
+
+
+
             LoginPage.init();
-            TicketsPage.init();
             CreateTicketPage.init();
             ArticlesPage.init();
 
-            // Subscribe to state view changes to trigger page data loading
-            store.subscribe(() => {
-                const { currentView, currentUser } = store.getState();
-                if (!currentUser) return;
-
-                switch (currentView) {
-                    case 'dashboard':
-                        DashboardPage.load();
-                        break;
-                    case 'tickets':
-                        TicketsPage.load();
-                        break;
-                    case 'kb':
-                        ArticlesPage.load();
-                        break;
-                    case 'stats':
-                        StatisticsPage.load();
-                        break;
-                    case 'admin':
-                        if (currentUser.role === 'admin') AdminPage.load();
-                        break;
-                }
-            });
-
-            // Check existing user session
             const session = store.loadSession();
-            if (session) {
-                Router.showScreen('main-app');
-                Router.switchView('dashboard');
-                DashboardPage.load();
+            const rememberedToken = store.getRememberedToken();
+            const tokenToValidate = session ? session.token : rememberedToken;
+            const isRemembered = !session && !!rememberedToken;
+
+            if (tokenToValidate) {
+                import('./services/api').then(({ authAPI }) => {
+                    authAPI
+                        .validate(tokenToValidate)
+                        .then(res => {
+                            SplashManager.hide();
+                            if (res.success) {
+                                store.setSession(res.user, isRemembered);
+                                Router.enterPortal();
+                            } else {
+                                store.setSession(null);
+                                Router.showScreen('login-screen');
+                            }
+                        })
+                        .catch(() => {
+                            SplashManager.hide();
+                            store.setSession(null);
+                            Router.showScreen('login-screen');
+                        });
+                });
             } else {
+                SplashManager.hide();
                 Router.showScreen('login-screen');
             }
         });
     }
 }
 
-// Bootstrap application
 App.init();

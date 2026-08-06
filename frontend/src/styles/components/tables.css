@@ -1,0 +1,105 @@
+/* =========================================
+   Tables
+   Data tables, glass tables, and list layouts.
+   ========================================= */
+
+/* ──── Table Layouts ──── */
+.table-container {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+    margin-bottom: var(--space-xl);
+}
+
+.glass-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.glass-table th {
+    text-align: left;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--table-head-bg, var(--color-bg-base));
+    font-size: 10px;
+    color: var(--color-text-secondary);
+    letter-spacing: 1px;
+    font-weight: 700;
+    border-bottom: 1px solid var(--color-border);
+    text-transform: uppercase;
+}
+
+.glass-table td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 13px;
+}
+
+.glass-table tbody tr.clickable-row:hover {
+    background: var(--color-bg-surface-hover);
+    cursor: pointer;
+}
+
+.glass-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ──── Flex Table (Legacy, keeping for fallback if needed) ──── */
+.table-wrap {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+.table-head {
+    display: flex;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--table-head-bg, var(--color-bg-base));
+    font-size: 10px;
+    color: var(--color-text-secondary);
+    letter-spacing: 1px;
+    font-weight: 700;
+    border-bottom: 1px solid var(--color-border);
+    text-transform: uppercase;
+}
+.table-row {
+    display: flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: var(--transition);
+}
+.table-row:hover {
+    background: var(--color-bg-surface-hover);
+}
+.table-row:last-child {
+    border-bottom: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .table-head,
+    .table-row {
+        min-width: 600px;
+    }
+    .glass-table {
+        min-width: 650px;
+    }
+}
+
+@media (max-width: 480px) {
+    .table-head {
+        font-size: 9px;
+        padding: 8px 10px;
+    }
+    .table-row {
+        padding: 9px 10px;
+        font-size: 11px;
+    }
+}

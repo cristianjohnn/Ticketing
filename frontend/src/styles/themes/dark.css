@@ -1,0 +1,152 @@
+/* =========================================
+   Appearance: Dark (Standard Base)
+   Premium "Linear-style" dark mode.
+   ========================================= */
+:root, [data-color-mode="dark"] {
+    /* 1. SEMANTIC TOKENS */
+    --color-primary: #818cf8; /* Indigo 400 — vibrant on dark */
+    --color-primary-hover: #a5b4fc; /* Indigo 300 */
+    --color-primary-bg-subtle: rgba(129, 140, 248, 0.12);
+    
+    --color-success: #34d399; /* Emerald 400 */
+    --color-success-hover: #6ee7b7;
+    --color-success-bg-subtle: rgba(52, 211, 153, 0.12);
+    
+    --color-warning: #fbbf24; /* Amber 400 */
+    --color-warning-hover: #fcd34d;
+    --color-warning-bg-subtle: rgba(251, 191, 36, 0.12);
+    
+    --color-danger: #f87171; /* Red 400 */
+    --color-danger-hover: #fca5a5;
+    --color-danger-bg-subtle: rgba(248, 113, 113, 0.12);
+
+    --color-info: #38bdf8; /* Sky 400 */
+    --color-info-hover: #7dd3fc;
+    --color-info-bg-subtle: rgba(56, 189, 248, 0.12);
+
+    --color-bg-base: #09090b; /* Zinc 950 — deep, premium */
+    --color-bg-surface: #18181b; /* Zinc 900 — elevated */
+    --color-bg-surface-hover: #27272a; /* Zinc 800 */
+    --color-bg-overlay: rgba(0, 0, 0, 0.75);
+
+    --color-border: #27272a; /* Zinc 800 — subtle, refined */
+    --color-border-hover: #3f3f46; /* Zinc 700 */
+
+    --color-text-primary: #fafafa; /* Zinc 50 */
+    --color-text-secondary: #a1a1aa; /* Zinc 400 */
+    --color-text-muted: #71717a; /* Zinc 500 */
+    --color-text-heading: #ffffff;
+    --color-text-inverse: #ffffff;
+
+    --color-shadow: rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 20px -5px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 25px 60px -12px rgba(0, 0, 0, 0.7);
+
+    /* 2. COMPONENT TOKENS */
+    
+    /* Layout */
+    --sidebar-bg: #09090b; /* Same depth as body */
+    --sidebar-text: #a1a1aa; /* Zinc 400 */
+    --sidebar-heading: #ffffff;
+    --sidebar-hover-bg: rgba(255, 255, 255, 0.04);
+    --sidebar-hover-text: #fafafa;
+    --sidebar-active-bg: rgba(129, 140, 248, 0.15);
+    --sidebar-active-text: #c7d2fe; /* Indigo 200 */
+    --sidebar-border: #27272a;
+    --sidebar-card-bg: #18181b;
+    --sidebar-card-border: #27272a;
+    --sidebar-accent: #818cf8;
+
+    /* Buttons */
+    --btn-primary-bg: var(--color-primary);
+    --btn-primary-hover: var(--color-primary-hover);
+    --btn-primary-text: #09090b; /* Dark text on bright button */
+    --btn-primary-border: transparent;
+    --btn-primary-shadow: 0 0 15px rgba(129, 140, 248, 0.2);
+    --btn-primary-shadow-hover: 0 0 25px rgba(129, 140, 248, 0.35);
+
+    --btn-secondary-bg: #18181b;
+    --btn-secondary-hover: #27272a;
+    --btn-secondary-text: var(--color-text-primary);
+    --btn-secondary-border: var(--color-border);
+    --btn-secondary-shadow: none;
+
+    --btn-danger-bg: var(--color-danger);
+    --btn-danger-hover: var(--color-danger-hover);
+    --btn-danger-text: #09090b;
+
+    --btn-radius: 6px;
+
+    /* Inputs */
+    --input-bg: #09090b;
+    --input-border: #3f3f46; /* Zinc 700 */
+    --input-text: var(--color-text-primary);
+    --input-placeholder: var(--color-text-muted);
+    --input-focus-border: var(--color-primary);
+    --input-focus-ring: 0 0 0 3px rgba(129, 140, 248, 0.15);
+    --input-radius: 6px;
+
+    /* Switches */
+    --switch-track: #3f3f46;
+    --switch-track-active: var(--color-primary);
+    --switch-thumb: #fafafa;
+    --switch-thumb-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+
+    /* Cards & Modals */
+    --card-bg: var(--color-bg-surface);
+    --card-border: var(--color-border);
+    --card-shadow: 0 0 0 1px var(--color-border); /* Border-as-shadow technique */
+    
+    --modal-bg: #18181b;
+    --modal-border: #3f3f46;
+    --modal-shadow: var(--shadow-xl);
+
+    /* Skeleton */
+    --skeleton-bg: #27272a;
+    --skeleton-shimmer: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.03) 20%,
+        rgba(255, 255, 255, 0.06) 60%,
+        rgba(255, 255, 255, 0) 100%
+    );
+
+    --modal-overlay: var(--color-bg-overlay);
+
+    /* Badges */
+    --badge-radius: 4px;
+    --badge-font-weight: 600;
+
+    --badge-success-bg: var(--color-success-bg-subtle);
+    --badge-success-text: var(--color-success);
+    --badge-success-border: transparent;
+
+    --badge-warning-bg: var(--color-warning-bg-subtle);
+    --badge-warning-text: var(--color-warning);
+    --badge-warning-border: transparent;
+
+    --badge-danger-bg: var(--color-danger-bg-subtle);
+    --badge-danger-text: var(--color-danger);
+    --badge-danger-border: transparent;
+
+    --badge-info-bg: var(--color-info-bg-subtle);
+    --badge-info-text: var(--color-info);
+    --badge-info-border: transparent;
+
+    --badge-neutral-bg: rgba(255, 255, 255, 0.06);
+    --badge-neutral-text: var(--color-text-secondary);
+    --badge-neutral-border: transparent;
+
+    /* Tables */
+    --table-head-bg: #09090b;
+    --table-head-text: var(--color-text-secondary);
+    --table-row-hover: rgba(255, 255, 255, 0.03);
+    --table-border: var(--color-border);
+    
+    /* Scrollbar */
+    --scrollbar-track: transparent;
+    --scrollbar-thumb: #3f3f46;
+    --scrollbar-thumb-hover: #52525b;
+}

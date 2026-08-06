@@ -1,0 +1,9 @@
+/* =========================================
+   Typography Base
+   ========================================= */
+:root {
+    /* Fallback fonts before a specific design language overrides them */
+    --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    --font-heading: var(--font);
+    --font-mono: 'Space Mono', 'Consolas', monospace;
+}

@@ -1,21 +1,18 @@
 import { db } from '../config/db';
 import { Article } from '../types';
 
-const stmts = {
-    getAllArticles: db.prepare(`SELECT * FROM articles ORDER BY sortOrder ASC, updatedAt DESC`),
-    getArticleById: db.prepare(`SELECT * FROM articles WHERE id = ?`),
-    getMaxSortOrder: db.prepare(`SELECT COALESCE(MAX(sortOrder), -1) as maxOrder FROM articles`),
-    insertArticle: db.prepare(`
-        INSERT INTO articles (id, title, content, category, author, createdAt, updatedAt, sortOrder)
-        VALUES (@id, @title, @content, @category, @author, @createdAt, @updatedAt, @sortOrder)
-    `),
-    deleteArticle: db.prepare(`DELETE FROM articles WHERE id = ?`),
-    updateSort: db.prepare('UPDATE articles SET sortOrder = ? WHERE id = ?')
-};
-
 export class ArticleService {
-    public static getAll(search?: string): Article[] {
-        let articles = stmts.getAllArticles.all() as Article[];
+    public static async getAll(search?: string): Promise<Article[]> {
+        const res = await db.query('SELECT * FROM articles ORDER BY "sortOrder" ASC, "updatedAt" DESC');
+        let articles = res.rows as Article[];
+        
+        // Ensure date objects are mapped to ISO strings
+        articles = articles.map(a => ({
+            ...a,
+            createdAt: (a.createdAt as any) instanceof Date ? (a.createdAt as any).toISOString() : String(a.createdAt),
+            updatedAt: (a.updatedAt as any) instanceof Date ? (a.updatedAt as any).toISOString() : String(a.updatedAt)
+        }));
+
         if (search) {
             const q = search.toLowerCase();
             articles = articles.filter(a => 
@@ -27,30 +24,49 @@ export class ArticleService {
         return articles;
     }
 
-    public static getById(id: string): Article | null {
-        const article = stmts.getArticleById.get(id) as Article | undefined;
-        return article || null;
+    public static async getById(id: string): Promise<Article | null> {
+        const res = await db.query('SELECT * FROM articles WHERE id = $1', [id]);
+        const a = res.rows[0] as Article | undefined;
+        if (!a) return null;
+
+        return {
+            ...a,
+            createdAt: (a.createdAt as any) instanceof Date ? (a.createdAt as any).toISOString() : String(a.createdAt),
+            updatedAt: (a.updatedAt as any) instanceof Date ? (a.updatedAt as any).toISOString() : String(a.updatedAt)
+        };
     }
 
-    public static create(articleData: Omit<Article, 'id' | 'createdAt' | 'updatedAt' | 'sortOrder'>): Article {
+    public static async create(articleData: Omit<Article, 'id' | 'createdAt' | 'updatedAt' | 'sortOrder'>): Promise<Article> {
         const id = `KB-${Date.now()}`;
-        const now = new Date().toISOString();
-        const { maxOrder } = stmts.getMaxSortOrder.get() as { maxOrder: number };
+        const now = new Date();
+        
+        const maxOrderRes = await db.query('SELECT COALESCE(MAX("sortOrder"), -1) as "maxOrder" FROM articles');
+        const maxOrder = maxOrderRes.rows[0].maxOrder;
         
         const article: Article = {
             ...articleData,
             id,
-            createdAt: now,
-            updatedAt: now,
+            createdAt: now.toISOString(),
+            updatedAt: now.toISOString(),
             sortOrder: maxOrder + 1
         };
 
-        stmts.insertArticle.run(article);
+        const insertParams = {
+            ...article,
+            createdAt: new Date(article.createdAt),
+            updatedAt: new Date(article.updatedAt)
+        };
+
+        await db.query(`
+            INSERT INTO articles (id, title, content, category, author, "createdAt", "updatedAt", "sortOrder")
+            VALUES (@id, @title, @content, @category, @author, @createdAt, @updatedAt, @sortOrder)
+        `, insertParams);
+
         return article;
     }
 
-    public static update(id: string, updateData: { title?: string; content?: string; category?: string }): Article | null {
-        const existing = stmts.getArticleById.get(id);
+    public static async update(id: string, updateData: { title?: string; content?: string; category?: string }): Promise<Article | null> {
+        const existing = await this.getById(id);
         if (!existing) return null;
 
         const allowed = ['title', 'content', 'category'];
@@ -60,7 +76,7 @@ export class ArticleService {
         for (const key of allowed) {
             const val = (updateData as any)[key];
             if (val !== undefined) {
-                setClauses.push(`${key} = @${key}`);
+                setClauses.push(`"${key}" = @${key}`);
                 values[key] = val;
             }
         }
@@ -69,26 +85,39 @@ export class ArticleService {
             return this.getById(id);
         }
 
-        setClauses.push('updatedAt = @updatedAt');
-        values.updatedAt = new Date().toISOString();
+        setClauses.push('"updatedAt" = @updatedAt');
+        values.updatedAt = new Date();
         values.id = id;
 
-        db.prepare(`UPDATE articles SET ${setClauses.join(', ')} WHERE id = @id`).run(values);
+        await db.query(`UPDATE articles SET ${setClauses.join(', ')} WHERE id = @id`, values);
         return this.getById(id);
     }
 
-    public static delete(id: string): boolean {
-        const existing = stmts.getArticleById.get(id);
-        if (!existing) return false;
+    public static async delete(id: string): Promise<boolean> {
+        const existingRes = await db.query('SELECT 1 FROM articles WHERE id = $1', [id]);
+        if (existingRes.rowCount === 0) return false;
 
-        stmts.deleteArticle.run(id);
+        await db.query('DELETE FROM articles WHERE id = $1', [id]);
         return true;
     }
 
-    public static reorder(order: string[]): void {
-        const reorderAll = db.transaction((ids: string[]) => {
-            ids.forEach((id, index) => stmts.updateSort.run(index, id));
-        });
-        reorderAll(order);
+    public static async reorder(order: string[]): Promise<void> {
+        const client = await db.pool.connect();
+        try {
+            await client.query('BEGIN');
+            for (let index = 0; index < order.length; index++) {
+                await client.query('UPDATE articles SET "sortOrder" = $1, "updatedAt" = $2 WHERE id = $3', [
+                    index,
+                    new Date(),
+                    order[index]
+                ]);
+            }
+            await client.query('COMMIT');
+        } catch (err) {
+            await client.query('ROLLBACK');
+            throw err;
+        } finally {
+            client.release();
+        }
     }
 }

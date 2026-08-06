@@ -1,0 +1,93 @@
+/* =========================================
+   Global Resets & Base Styles
+   Standardizes browser defaults, body rules,
+   and scrollbar styles.
+   ========================================= */
+
+/* ──── Reset & Base ──── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 15px;
+    scroll-behavior: smooth;
+    background: var(--color-bg-base);
+    transition: var(--theme-transition);
+}
+
+body {
+    font-family: var(--font);
+    background: transparent;
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+    transition: var(--theme-transition);
+}
+
+/* ──── Global Smooth Theme Transitions ──── */
+html,
+body,
+.sidebar,
+.topbar,
+.glass-card,
+.panel,
+.stat-card,
+.ticket-row-item,
+.kb-article-card,
+.profile-card,
+.profile-security-card,
+.users-table th,
+.users-table td,
+.table-wrap,
+.table-head,
+.table-row,
+.mini-card,
+.client-card,
+.badge,
+.badge-dept,
+.badge-cat,
+.badge-sla,
+input,
+select,
+textarea,
+.btn,
+.sb-nav-btn,
+.theme-toggle,
+.sidebar-toggle,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+label,
+svg,
+path,
+circle,
+rect,
+line,
+polyline,
+polygon {
+    transition: var(--theme-transition);
+}
+
+/* ──── Scrollbar ──── */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+}

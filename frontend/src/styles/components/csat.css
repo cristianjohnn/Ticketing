@@ -1,0 +1,664 @@
+/* =========================================
+   Customer Satisfaction (CSAT) System Styles
+   ========================================= */
+
+:root {
+    /* ──── CSAT Star Tokens ──── */
+    --csat-star-filled: #f59e0b;           /* Amber 500 */
+    --csat-star-hover: #fbbf24;            /* Amber 400 */
+    --csat-star-empty: rgba(148, 163, 184, 0.28); /* Slate 400 / 28% */
+    --csat-star-empty-hover: rgba(245, 158, 11, 0.35);
+
+    /* ──── CSAT 1-5 Tier Tokens ──── */
+    --csat-rating-1: #ef4444;              /* Red 500 - Very Poor */
+    --csat-rating-1-bg: rgba(239, 68, 68, 0.12);
+    --csat-rating-2: #f97316;              /* Orange 500 - Poor */
+    --csat-rating-2-bg: rgba(249, 115, 22, 0.12);
+    --csat-rating-3: #eab308;              /* Yellow 500 - Average */
+    --csat-rating-3-bg: rgba(234, 179, 8, 0.12);
+    --csat-rating-4: #84cc16;              /* Lime 500 - Good */
+    --csat-rating-4-bg: rgba(132, 204, 22, 0.12);
+    --csat-rating-5: #10b981;              /* Emerald 500 - Excellent */
+    --csat-rating-5-bg: rgba(16, 185, 129, 0.12);
+
+    /* ──── Motion & Interaction ──── */
+    --csat-spring-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --csat-ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+[data-color-mode="dark"] {
+    --csat-star-filled: #fbbf24;
+    --csat-star-empty: rgba(255, 255, 255, 0.16);
+    --csat-rating-1: #f87171;
+    --csat-rating-2: #fb923c;
+    --csat-rating-3: #facc15;
+    --csat-rating-4: #a3e635;
+    --csat-rating-5: #34d399;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   1. StarDisplay (Read-Only)
+   ───────────────────────────────────────────────────────────── */
+.csat-star-display {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--star-gap, 4px);
+    vertical-align: middle;
+}
+
+.csat-star-track {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--star-gap, 4px);
+}
+
+.csat-star {
+    display: inline-block;
+    transition: transform var(--duration-fast, 150ms) var(--ease-standard);
+}
+
+.csat-star-full {
+    color: var(--csat-star-filled);
+}
+
+.csat-star-empty {
+    color: var(--csat-star-empty);
+}
+
+.csat-star-numeric {
+    font-size: var(--star-font-size, 0.875rem);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-left: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2. StarRatingInput (Interactive Selector)
+   ───────────────────────────────────────────────────────────── */
+.csat-rating-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 12px;
+    border-radius: var(--radius-lg, 12px);
+    background: var(--color-bg-surface, rgba(255, 255, 255, 0.03));
+    border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+    outline: none;
+    transition: border-color var(--duration-fast, 150ms) ease;
+}
+
+.csat-rating-input:focus-visible {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary-bg-subtle);
+}
+
+.csat-rating-input.csat-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.csat-stars-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.csat-star-btn {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 50%;
+    color: var(--csat-star-empty);
+    transition: color var(--duration-fast, 150ms) ease,
+                transform var(--duration-fast, 150ms) var(--csat-spring-easing);
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.csat-star-btn:hover {
+    color: var(--csat-star-hover);
+    transform: scale(1.22);
+}
+
+.csat-star-btn.csat-filled {
+    color: var(--csat-star-filled);
+}
+
+.csat-star-btn.csat-selected {
+    color: var(--csat-star-filled);
+    transform: scale(1.15);
+}
+
+.csat-star-btn.csat-hovered {
+    color: var(--csat-star-hover);
+}
+
+.csat-star-btn:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.csat-interactive-star {
+    fill: currentColor;
+    transition: fill var(--duration-fast, 150ms) ease;
+}
+
+.csat-input-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    min-height: 42px;
+}
+
+.csat-input-label-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    transition: color var(--duration-fast, 150ms) ease;
+}
+
+.csat-input-label-text[data-rating="1"] { color: var(--csat-rating-1); }
+.csat-input-label-text[data-rating="2"] { color: var(--csat-rating-2); }
+.csat-input-label-text[data-rating="3"] { color: var(--csat-rating-3); }
+.csat-input-label-text[data-rating="4"] { color: var(--csat-rating-4); }
+.csat-input-label-text[data-rating="5"] { color: var(--csat-rating-5); }
+
+.csat-input-desc-text {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   3. RatingSummary Component
+   ───────────────────────────────────────────────────────────── */
+.csat-summary-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg, 12px);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.csat-summary-compact {
+    padding: 12px 14px;
+    gap: 10px;
+}
+
+.csat-summary-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.csat-summary-score-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.csat-score-numeric {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--color-text-heading);
+    letter-spacing: -0.03em;
+}
+
+.csat-score-stars {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.csat-score-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+.csat-badge {
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.csat-badge.badge-success {
+    background: var(--csat-rating-5-bg);
+    color: var(--csat-rating-5);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.csat-badge.badge-warning {
+    background: var(--csat-rating-3-bg);
+    color: var(--csat-rating-3);
+    border: 1px solid rgba(234, 179, 8, 0.25);
+}
+
+.csat-badge.badge-danger {
+    background: var(--csat-rating-1-bg);
+    color: var(--csat-rating-1);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.csat-summary-feedback {
+    display: flex;
+    gap: 10px;
+    background: var(--color-bg-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius, 8px);
+    padding: 12px 14px;
+}
+
+.csat-feedback-quote-icon {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.csat-feedback-blockquote {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text-primary);
+    font-style: italic;
+}
+
+.csat-summary-no-feedback {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+.csat-summary-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-border);
+}
+
+.csat-attribution-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.csat-avatar-initials {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-primary-bg-subtle);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.csat-attribution-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.csat-attribution-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.csat-attribution-date {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.csat-response-time-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    background: var(--color-bg-base);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm, 4px);
+    border: 1px solid var(--color-border);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4. RatingModal UI & Motion
+   ───────────────────────────────────────────────────────────── */
+.csat-rating-modal {
+    max-width: 520px;
+    width: 100%;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg, 16px);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+}
+
+.csat-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.csat-modal-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.csat-modal-icon-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--csat-star-filled);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.csat-modal-title {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text-heading);
+}
+
+.csat-modal-subtitle {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+}
+
+.csat-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: var(--radius-sm, 4px);
+    transition: color var(--duration-fast, 150ms) ease;
+}
+
+.csat-modal-close:hover {
+    color: var(--color-text-primary);
+}
+
+.csat-modal-body {
+    padding: 20px 24px 24px;
+}
+
+.csat-ticket-banner {
+    background: var(--color-bg-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius, 8px);
+    padding: 12px 14px;
+    margin-bottom: 18px;
+}
+
+.csat-banner-label {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+}
+
+.csat-banner-title {
+    margin: 4px 0 8px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.csat-banner-meta {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.csat-meta-divider {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+}
+
+.csat-expiry-pill {
+    color: var(--csat-rating-2);
+    font-weight: 600;
+}
+
+.csat-selector-wrapper {
+    margin-bottom: 18px;
+}
+
+.csat-feedback-group {
+    margin-bottom: 18px;
+}
+
+.csat-textarea-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.csat-form-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.csat-optional-tag {
+    font-weight: 400;
+    color: var(--color-text-muted);
+}
+
+.csat-char-counter {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.csat-feedback-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--color-bg-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius, 8px);
+    padding: 10px 12px;
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    resize: vertical;
+    transition: border-color var(--duration-fast, 150ms) ease;
+}
+
+.csat-feedback-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary-bg-subtle);
+}
+
+.csat-submit-error {
+    background: var(--csat-rating-1-bg);
+    color: var(--csat-rating-1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 10px 14px;
+    border-radius: var(--radius, 8px);
+    font-size: 0.8125rem;
+    margin-bottom: 16px;
+}
+
+.csat-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.csat-btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.csat-btn-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: csatSpin 0.7s linear infinite;
+}
+
+@keyframes csatSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5. Modal Ineligible / Success / Loading States
+   ───────────────────────────────────────────────────────────── */
+.csat-loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 36px 16px;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+}
+
+.csat-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--color-border);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: csatSpin 0.8s linear infinite;
+}
+
+.csat-ineligible-container,
+.csat-success-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 16px;
+    gap: 12px;
+}
+
+.csat-ineligible-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.csat-icon-success {
+    background: var(--csat-rating-5-bg);
+    color: var(--csat-rating-5);
+}
+
+.csat-icon-warning {
+    background: var(--csat-rating-3-bg);
+    color: var(--csat-rating-3);
+}
+
+.csat-icon-danger {
+    background: var(--csat-rating-1-bg);
+    color: var(--csat-rating-1);
+}
+
+.csat-icon-info {
+    background: var(--color-primary-bg-subtle);
+    color: var(--color-primary);
+}
+
+.csat-existing-rating-preview {
+    background: var(--color-bg-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius, 8px);
+    padding: 12px 18px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 8px 0 14px;
+}
+
+.csat-existing-score {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--csat-star-filled);
+}
+
+.csat-existing-comment {
+    margin: 6px 0 0;
+    font-style: italic;
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+}
+
+.csat-success-burst {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--csat-rating-5-bg);
+    color: var(--csat-rating-5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: csatBurst 0.5s var(--csat-spring-easing);
+}
+
+@keyframes csatBurst {
+    0% { transform: scale(0.4); opacity: 0; }
+    70% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.csat-success-checkmark {
+    animation: csatCheckmark 0.6s ease forwards;
+}
+
+.csat-success-title {
+    font-size: 1.375rem;
+    font-weight: 800;
+    color: var(--color-text-heading);
+    margin: 0;
+}
+
+.csat-success-subtitle {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.csat-success-score-pill {
+    background: var(--csat-rating-5-bg);
+    color: var(--csat-rating-5);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    margin-top: 4px;
+}

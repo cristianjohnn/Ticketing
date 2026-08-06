@@ -1,0 +1,160 @@
+/* =========================================
+   Buttons
+   Primary, secondary, danger, and icon buttons.
+   ========================================= */
+
+/* ──── Buttons ──── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: var(--btn-radius);
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 
+        transform var(--duration-fast) var(--ease-standard),
+        background-color var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard),
+        color var(--duration-fast) var(--ease-standard);
+    text-decoration: none;
+    transform: scale(1);
+}
+
+.btn:active {
+    transform: scale(var(--scale-pressed));
+    transition: transform var(--duration-instant) var(--ease-accelerate);
+}
+.btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: var(--btn-primary-bg);
+    border: 1px solid var(--btn-primary-border);
+    color: var(--btn-primary-text);
+    box-shadow: var(--btn-primary-shadow);
+}
+.btn-primary:hover {
+    transform: scale(var(--scale-hover)) translateY(-1px);
+    background: var(--btn-primary-hover);
+    box-shadow: var(--btn-primary-shadow-hover);
+}
+
+.btn-ghost, .btn-secondary {
+    background: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text);
+    border: 1.5px solid var(--btn-secondary-border);
+}
+.btn-ghost:hover, .btn-secondary:hover {
+    background: var(--btn-secondary-hover);
+    color: var(--color-text-primary);
+    border-color: var(--color-border-hover);
+    transform: scale(var(--scale-hover)) translateY(-1px);
+}
+
+.btn-danger {
+    background: var(--color-danger-bg-subtle);
+    border: 1px solid var(--color-danger);
+    color: var(--color-danger);
+}
+.btn-danger:hover {
+    background: var(--btn-danger-hover);
+    color: var(--btn-danger-text);
+    transform: scale(var(--scale-hover)) translateY(-1px);
+}
+
+.btn-rate {
+    padding: 7px 14px;
+    background: var(--color-warning-bg-subtle);
+    border: 1px solid var(--color-warning);
+    border-radius: var(--btn-radius);
+    color: var(--color-warning);
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: 
+        transform var(--duration-fast) var(--ease-standard),
+        background-color var(--duration-fast) var(--ease-standard);
+}
+.btn-rate:active {
+    transform: scale(var(--scale-pressed));
+}
+.btn-rate:hover {
+    background: var(--color-warning);
+    color: var(--color-text-inverse);
+}
+
+.btn-login {
+    width: 100%;
+    justify-content: center;
+    padding: 0.9rem;
+    font-size: 1.05rem;
+    margin-top: 0.5rem;
+    background: var(--btn-primary-bg);
+    box-shadow: var(--btn-primary-shadow);
+    border: 1px solid var(--btn-primary-border);
+    color: var(--btn-primary-text);
+    transition: all 0.3s ease;
+}
+.btn-login:hover {
+    background: var(--btn-primary-hover);
+    box-shadow: var(--btn-primary-shadow-hover);
+    transform: translateY(-2px);
+}
+.btn-login:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: var(--btn-primary-shadow);
+    transition: transform 0.1s ease;
+}
+.btn-login .btn-arrow {
+    transition: transform 0.3s ease;
+}
+.btn-login:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+.btn-sm {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+}
+
+.btn-icon {
+    padding: 0.4rem;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+
+/* ──── Attachment Links ──── */
+.attachment-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    background: var(--input-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    text-decoration: none;
+    transition: 
+        transform var(--duration-fast) var(--ease-standard),
+        background-color var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard);
+}
+.attachment-link:active {
+    transform: scale(var(--scale-pressed));
+}
+.attachment-link:hover {
+    background: var(--color-bg-surface-hover);
+    border-color: var(--color-border-hover);
+    color: var(--color-text-primary);
+}

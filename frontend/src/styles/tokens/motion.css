@@ -1,0 +1,70 @@
+/* =========================================
+   Motion Design System Tokens
+   ========================================= */
+
+:root {
+    /* ──── Durations ──── */
+    --duration-instant: 50ms;
+    --duration-fast: 150ms;      /* Hovers, buttons, tooltips */
+    --duration-normal: 200ms;    /* Dropdowns, cards, notification details */
+    --duration-slow: 250ms;      /* Sidebars, ticket details, modals */
+
+    /* ──── Easing ──── */
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);    /* Elements remaining on screen */
+    --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);  /* Elements entering the screen */
+    --ease-accelerate: cubic-bezier(0.4, 0.0, 1.0, 1);  /* Elements exiting the screen */
+    
+    /* ──── Distances ──── */
+    --motion-distance-sm: 4px;   /* Micro motion translations */
+    --motion-distance-md: 8px;   /* Dropdowns, card lifts */
+    --motion-distance-lg: 16px;  /* Modal drops, layout enters */
+
+    /* ──── Opacity ──── */
+    --opacity-hidden: 0;
+    --opacity-visible: 1;
+
+    /* ──── Scale ──── */
+    --scale-pressed: 0.98;
+    --scale-hover: 1.02;
+
+    /* ──── Staggers ──── */
+    --stagger-1: 0ms;
+    --stagger-2: 40ms;
+    --stagger-3: 80ms;
+    --stagger-4: 120ms;
+    --stagger-5: 160ms;
+}
+
+/* =========================================
+   Accessibility (Reduced Motion)
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        /* Clamp all durations */
+        --duration-instant: 0ms;
+        --duration-fast: 50ms;
+        --duration-normal: 100ms;
+        --duration-slow: 150ms;
+
+        /* Remove distances (no translations) */
+        --motion-distance-sm: 0px;
+        --motion-distance-md: 0px;
+        --motion-distance-lg: 0px;
+
+        /* Remove scaling */
+        --scale-pressed: 1;
+        --scale-hover: 1;
+
+        /* Remove staggers */
+        --stagger-1: 0ms;
+        --stagger-2: 0ms;
+        --stagger-3: 0ms;
+        --stagger-4: 0ms;
+        --stagger-5: 0ms;
+    }
+
+    /* Force all transforms to none */
+    *, *::before, *::after {
+        transform: none !important;
+    }
+}

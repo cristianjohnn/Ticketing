@@ -1,0 +1,140 @@
+/* =========================================
+   Design Language: Hexagon Blue
+   High-tech glassmorphism with animated hexagon canvas.
+   ========================================= */
+[data-design-language="hexagon-blue"] {
+    --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    --font-heading: var(--font);
+    
+    --radius: 10px;
+    --radius-sm: 6px;
+    --radius-lg: 14px;
+    
+    /* Semantic Token Overrides — Cyan identity */
+    --color-primary: #00e5ff;
+    --color-primary-hover: #00b8d4;
+    --color-primary-bg-subtle: rgba(0, 229, 255, 0.08);
+
+    --color-info: #00e5ff;
+    --color-info-hover: #00b8d4;
+    --color-info-bg-subtle: rgba(0, 229, 255, 0.08);
+
+    /* Form Controls */
+    --switch-track-active: var(--color-primary);
+    --input-focus-ring: 0 0 0 3px rgba(0, 229, 255, 0.2);
+    --input-focus-border: var(--color-primary);
+
+    /* Button Overrides — Gradient with glow */
+    --btn-primary-bg: linear-gradient(135deg, #0077b6, #00e5ff);
+    --btn-primary-hover: linear-gradient(135deg, #005f8d, #00b8d4);
+    --btn-primary-border: rgba(0, 229, 255, 0.3);
+    --btn-primary-text: #ffffff;
+    --btn-primary-shadow: 0 2px 12px rgba(0, 229, 255, 0.15);
+    --btn-primary-shadow-hover: 0 4px 24px rgba(0, 229, 255, 0.3);
+
+    /* Badges */
+    --badge-info-bg: rgba(0, 229, 255, 0.1);
+    --badge-info-text: #00e5ff;
+    --badge-info-border: rgba(0, 229, 255, 0.2);
+
+    --btn-radius: 6px;
+    --input-radius: 6px;
+}
+
+/* ─── Hexagon Blue: Dark Mode ─── */
+[data-design-language="hexagon-blue"][data-color-mode="dark"] {
+    /* Surfaces — Translucent for glassmorphism */
+    --color-bg-base: rgba(8, 12, 20, 0.85);
+    --color-bg-surface: rgba(15, 25, 45, 0.6);
+    --color-bg-surface-hover: rgba(25, 40, 65, 0.65);
+    --color-border: rgba(0, 229, 255, 0.1);
+    --color-border-hover: rgba(0, 229, 255, 0.2);
+
+    --color-text-primary: #e0f7fa;
+    --color-text-heading: #ffffff;
+    --color-text-secondary: #80cbc4;
+    --color-text-muted: #4db6ac;
+
+    /* Sidebar — Frosted glass */
+    --sidebar-bg: rgba(5, 10, 20, 0.75);
+    --sidebar-text: #80cbc4;
+    --sidebar-heading: #e0f7fa;
+    --sidebar-hover-bg: rgba(0, 229, 255, 0.08);
+    --sidebar-hover-text: #e0f7fa;
+    --sidebar-active-bg: rgba(0, 229, 255, 0.15);
+    --sidebar-active-text: #00e5ff;
+    --sidebar-border: rgba(0, 229, 255, 0.08);
+    --sidebar-card-bg: rgba(0, 229, 255, 0.06);
+    --sidebar-card-border: rgba(0, 229, 255, 0.12);
+    --sidebar-accent: #00e5ff;
+
+    /* Cards & Modals — Frosted glass */
+    --card-bg: rgba(10, 20, 40, 0.5);
+    --card-border: rgba(0, 229, 255, 0.12);
+    --card-shadow: 0 4px 20px rgba(0, 229, 255, 0.06), 0 0 1px rgba(0, 229, 255, 0.2);
+    
+    --modal-bg: rgba(10, 15, 30, 0.85);
+    --modal-border: rgba(0, 229, 255, 0.15);
+    --modal-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 229, 255, 0.3);
+
+    /* Inputs — Glass */
+    --input-bg: rgba(5, 15, 30, 0.5);
+    --input-border: rgba(0, 229, 255, 0.12);
+
+    /* Tables */
+    --table-head-bg: rgba(5, 15, 30, 0.4);
+    --table-row-hover: rgba(0, 229, 255, 0.04);
+
+    /* Skeleton */
+    --skeleton-bg: rgba(0, 229, 255, 0.06);
+}
+
+/* ─── Hexagon Blue: Light Mode ─── */
+[data-design-language="hexagon-blue"][data-color-mode="light"] {
+    --color-primary: #0097a7;
+    --color-primary-hover: #00838f;
+    --color-primary-bg-subtle: rgba(0, 151, 167, 0.08);
+
+    --color-bg-base: #f0f9ff;
+    --color-bg-surface: rgba(255, 255, 255, 0.9);
+    --color-bg-surface-hover: rgba(240, 249, 255, 0.95);
+    --color-border: rgba(0, 151, 167, 0.15);
+    --color-border-hover: rgba(0, 151, 167, 0.25);
+
+    --color-text-primary: #0c4a6e;
+    --color-text-heading: #042f44;
+    --color-text-secondary: #0e7490;
+
+    /* Sidebar — Clean cyan/teal */
+    --sidebar-bg: #ffffff;
+    --sidebar-text: #0e7490;
+    --sidebar-heading: #042f44;
+    --sidebar-hover-bg: rgba(0, 151, 167, 0.08);
+    --sidebar-hover-text: #042f44;
+    --sidebar-active-bg: rgba(0, 151, 167, 0.15);
+    --sidebar-active-text: #0097a7;
+    --sidebar-border: rgba(0, 151, 167, 0.15);
+    --sidebar-card-bg: rgba(0, 151, 167, 0.05);
+    --sidebar-card-border: rgba(0, 151, 167, 0.12);
+    --sidebar-accent: #0097a7;
+
+    /* Cards */
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: rgba(0, 151, 167, 0.12);
+    --card-shadow: 0 2px 8px rgba(0, 151, 167, 0.08), 0 0 1px rgba(0, 151, 167, 0.15);
+    
+    --modal-bg: rgba(255, 255, 255, 0.95);
+    --modal-border: rgba(0, 151, 167, 0.15);
+    --modal-shadow: 0 8px 30px rgba(0, 151, 167, 0.12);
+
+    --btn-primary-bg: linear-gradient(135deg, #0077b6, #0097a7);
+    --btn-primary-shadow: 0 2px 8px rgba(0, 151, 167, 0.2);
+    --btn-primary-shadow-hover: 0 4px 16px rgba(0, 151, 167, 0.3);
+
+    --input-bg: rgba(255, 255, 255, 0.8);
+    --input-border: rgba(0, 151, 167, 0.2);
+    --input-focus-ring: 0 0 0 3px rgba(0, 151, 167, 0.15);
+
+    --table-head-bg: rgba(240, 249, 255, 0.8);
+    --table-row-hover: rgba(0, 151, 167, 0.04);
+}

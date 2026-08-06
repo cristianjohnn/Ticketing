@@ -1,0 +1,17 @@
+/* =========================================
+   Base Layout Tokens (Theme Independent)
+   ========================================= */
+:root {
+    --sidebar-width: 240px;
+    --workspace-sidebar-width: 240px;
+    --workspace-list-min-width: 320px;
+    --workspace-detail-min-width: 400px;
+    --workspace-max-width: 1600px;
+    --workspace-panel-padding: var(--space-md);
+    --workspace-header-height: 60px;
+    --workspace-footer-height: 60px;
+    --workspace-panel-gap: 0px;
+    
+    --opacity-disabled: 0.6;
+    --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}

@@ -1,0 +1,223 @@
+/* =========================================
+   Design Language: Quantum Flux
+   High-energy physics / Modern Brutalism.
+   Faithful to DESIGN.md specification.
+   ========================================= */
+[data-design-language="quantum"] {
+    /* Typography ??? Aggressive, engineered */
+    --font: 'Geist', 'Space Grotesk', system-ui, sans-serif;
+    --font-heading: 'Space Grotesk', system-ui, sans-serif;
+    
+    /* Shapes ??? Strictly sharp, 0px everywhere */
+    --radius: 0px;
+    --radius-sm: 0px;
+    --radius-lg: 0px;
+    --btn-radius: 0px;
+    --input-radius: 0px;
+    --badge-radius: 0px;
+
+    /* Primary (Amber Flux) ??? Stable high energy */
+    --color-primary: #FFBF00;
+    --color-primary-hover: #FFD54F;
+    --color-primary-bg-subtle: rgba(255, 191, 0, 0.12);
+
+    /* Danger (Crimson Pulse) ??? Unstable energy, red-line status */
+    --color-danger: #FF003C;
+    --color-danger-hover: #FF4D6A;
+    --color-danger-bg-subtle: rgba(255, 0, 60, 0.1);
+
+    --color-success: #00E676;
+    --color-success-bg-subtle: rgba(0, 230, 118, 0.1);
+
+    --color-warning: #FF6D00;
+    --color-warning-bg-subtle: rgba(255, 109, 0, 0.1);
+
+    /* Form Controls */
+    --switch-track-active: var(--color-primary);
+    --switch-thumb: #000000;
+    --switch-thumb-shadow: none;
+}
+
+
+/* ????????? Quantum: Light Mode ????????? */
+/* Per code.html reference: warm off-white with amber tints */
+[data-design-language="quantum"][data-color-mode="light"] {
+    --color-primary: #795900; /* Darker amber for readability on light bg */
+    --color-primary-hover: #5c4300;
+    --color-primary-bg-subtle: rgba(121, 89, 0, 0.08);
+
+    --color-danger: #BA1A1A;
+    --color-danger-hover: #93000a;
+
+    --color-bg-base: #FDFCFA; /* Warm off-white */
+    --color-bg-surface: #FFFFFF;
+    --color-bg-surface-hover: #F0EBE4; /* surface-container */
+
+    --color-border: #E5E2DA; /* surface-container-highest */
+    --color-border-hover: #CEC6B4; /* outline-variant */
+
+    --color-text-primary: #1A1C18;
+    --color-text-heading: #1A1C18;
+    --color-text-secondary: #49473A; /* on-surface-variant */
+    --color-text-muted: #7D7363; /* outline */
+
+    /* Sidebar */
+    --sidebar-bg: #FFFFFF;
+    --sidebar-text: #49473A;
+    --sidebar-heading: #1A1C18;
+    --sidebar-hover-bg: #F0EBE4;
+    --sidebar-hover-text: #1A1C18;
+    --sidebar-active-bg: #FFBF00;
+    --sidebar-active-text: #261A00; /* on-primary-fixed */
+    --sidebar-border: #E5E2DA;
+    --sidebar-card-bg: #F6F3EB;
+    --sidebar-card-border: #E5E2DA;
+    --sidebar-accent: #795900;
+
+    /* Cards ??? 1px borders, no soft shadows */
+    --card-bg: #FFFFFF;
+    --card-border: #E5E2DA;
+    --card-shadow: none;
+
+    --modal-bg: #FFFFFF;
+    --modal-border: #CEC6B4;
+    --modal-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.1);
+
+    /* Buttons ??? DESIGN.md spec */
+    --btn-primary-bg: #FFBF00; /* primary-container */
+    --btn-primary-hover: #FFD54F;
+    --btn-primary-text: #261A00; /* on-primary-fixed */
+    --btn-primary-border: #FFBF00;
+    --btn-primary-shadow: none;
+    --btn-primary-shadow-hover: 0 10px 30px -5px rgba(255, 191, 0, 0.3);
+
+    --btn-secondary-bg: transparent;
+    --btn-secondary-text: #795900;
+    --btn-secondary-border: #FFBF00;
+    --btn-secondary-hover: rgba(255, 191, 0, 0.1);
+    --btn-secondary-shadow: none;
+
+    --btn-danger-bg: var(--color-danger-bg-subtle);
+    --btn-danger-hover: var(--color-danger);
+    --btn-danger-text: var(--color-danger);
+
+    /* Inputs ??? Bottom-border style, "chamber" feel */
+    --input-bg: transparent;
+    --input-border: #CEC6B4;
+    --input-focus-ring: none;
+    --input-focus-border: #FFBF00;
+
+    /* Tables */
+    --table-head-bg: #F6F3EB; /* surface-container-low */
+    --table-row-hover: #F0EBE4;
+
+    /* Badges */
+    --badge-success-bg: rgba(22, 163, 74, 0.08);
+    --badge-success-text: #065f46;
+    --badge-danger-bg: rgba(186, 26, 26, 0.08);
+    --badge-danger-text: #BA1A1A;
+    --badge-warning-bg: rgba(255, 109, 0, 0.08);
+    --badge-warning-text: #92400e;
+    --badge-info-bg: rgba(121, 89, 0, 0.08);
+    --badge-info-text: #795900;
+    --badge-neutral-bg: #EBE7DF;
+    --badge-neutral-text: #49473A;
+
+    --switch-thumb: #FFFFFF;
+    --switch-track: #CEC6B4;
+
+    --scrollbar-thumb: #CEC6B4;
+    --scrollbar-thumb-hover: #9C8F78;
+}
+
+/* ????????? Quantum: Dark Mode ????????? */
+/* Faithful to DESIGN.md: The Void, Carbon surfaces, Energy Leak glows */
+[data-design-language="quantum"][data-color-mode="dark"] {
+    /* Level 0: The Void */
+    --color-bg-base: #000000;
+    /* Level 1: The Chamber */
+    --color-bg-surface: #0D0D0D;
+    --color-bg-surface-hover: #1A1A1A; /* Carbon */
+
+    --color-border: #1A1A1A; /* Carbon strokes */
+    --color-border-hover: #353535; /* surface-container-highest */
+
+    --color-text-primary: #E2E2E2; /* on-surface */
+    --color-text-heading: #FFFFFF;
+    --color-text-secondary: #D4C5AB; /* on-surface-variant (warm) */
+    --color-text-muted: #9C8F78; /* outline */
+
+    /* Sidebar — The Void */
+    --sidebar-bg: #000000;
+    --sidebar-text: #9C8F78;
+    --sidebar-heading: #FFFFFF;
+    --sidebar-hover-bg: #0D0D0D;
+    --sidebar-hover-text: #E2E2E2;
+    --sidebar-active-bg: #FFBF00;
+    --sidebar-active-text: #000000;
+    --sidebar-border: #1A1A1A;
+    --sidebar-card-bg: #0D0D0D;
+    --sidebar-card-border: #1A1A1A;
+    --sidebar-accent: #FFBF00;
+
+    /* Cards ??? Chamber style with energy-leak potential */
+    --card-bg: #0D0D0D;
+    --card-border: #1A1A1A;
+    --card-shadow: none; /* Depth via tonal layers, not shadows */
+
+    --modal-bg: #0D0D0D;
+    --modal-border: #353535;
+    --modal-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+
+    /* Buttons ??? DESIGN.md spec */
+    /* Primary: Solid Amber bg, black text, energy-leak glow on hover */
+    --btn-primary-bg: #FFBF00;
+    --btn-primary-hover: #FFD54F;
+    --btn-primary-text: #000000;
+    --btn-primary-border: #FFBF00;
+    --btn-primary-shadow: none;
+    --btn-primary-shadow-hover: 0 0 20px rgba(255, 191, 0, 0.3), 0 10px 30px -5px rgba(255, 191, 0, 0.2);
+
+    /* Secondary: 1px Amber stroke, no fill */
+    --btn-secondary-bg: transparent;
+    --btn-secondary-text: #FFBF00;
+    --btn-secondary-border: #FFBF00;
+    --btn-secondary-hover: rgba(255, 191, 0, 0.1);
+    --btn-secondary-shadow: none;
+
+    --btn-danger-bg: transparent;
+    --btn-danger-hover: rgba(255, 0, 60, 0.15);
+    --btn-danger-text: #FF003C;
+
+    /* Inputs ??? Baseline glow on focus */
+    --input-bg: #000000;
+    --input-border: #1A1A1A;
+    --input-focus-ring: 0 15px 25px -15px rgba(255, 191, 0, 0.2);
+    --input-focus-border: #FFBF00;
+
+    --switch-thumb: #FFFFFF;
+    --switch-track: #353535;
+
+    /* Tables */
+    --table-head-bg: #0D0D0D;
+    --table-row-hover: rgba(255, 191, 0, 0.04);
+
+    /* Badges */
+    --badge-success-bg: rgba(0, 230, 118, 0.1);
+    --badge-success-text: #00E676;
+    --badge-danger-bg: rgba(255, 0, 60, 0.1);
+    --badge-danger-text: #FF003C;
+    --badge-warning-bg: rgba(255, 109, 0, 0.1);
+    --badge-warning-text: #FF6D00;
+    --badge-info-bg: rgba(255, 191, 0, 0.1);
+    --badge-info-text: #FFBF00;
+    --badge-neutral-bg: #1A1A1A;
+    --badge-neutral-text: #9C8F78;
+
+    /* Skeleton */
+    --skeleton-bg: #1A1A1A;
+
+    --scrollbar-thumb: #353535;
+    --scrollbar-thumb-hover: #504532;
+}
+

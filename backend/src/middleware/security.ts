@@ -9,10 +9,10 @@ export const securityHeaders = (): RequestHandler => {
     });
 };
 
-// General rate limiter: max 150 requests per 15 minutes per IP
+// General rate limiter: max 1500 requests per 15 minutes per IP (supports heavy SPA usage + polling)
 export const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 150,
+    max: 1500,
     message: { error: 'Too many requests from this IP, please try again after 15 minutes' },
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false,  // Disable the `X-RateLimit-*` headers

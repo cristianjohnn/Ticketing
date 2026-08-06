@@ -1,49 +1,91 @@
+import { ModalsManager } from '../components/modals/ModalsManager';
+import { showToast } from '../components/Toast';
 import { ticketsAPI } from '../services/api';
 import { store } from '../state/store';
-import { showToast } from '../components/Toast';
-import { ModalsComponent } from '../components/Modals';
+import { handleUIError } from '../utils/errorHandler';
+import { LoadingManager } from '../utils/loadingManager';
+import { TicketsPage } from './Tickets';
 
 export class CreateTicketPage {
     public static init(): void {
-        const form = document.getElementById('create-ticket-form') as HTMLFormElement;
-        const newTicketBtns = document.querySelectorAll('.new-ticket-trigger');
+        const form = document.getElementById('ticket-form') as HTMLFormElement;
+        const openBtn = document.getElementById('client-new-ticket-btn');
+        const departmentSelect = document.getElementById('ticket-department') as HTMLSelectElement;
+        const customDeptGroup = document.getElementById('custom-dept-group');
+        const customDeptInput = document.getElementById(
+            'ticket-custom-department',
+        ) as HTMLInputElement;
 
-        newTicketBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                ModalsComponent.openModal('create-ticket-modal');
-            });
+        openBtn?.addEventListener('click', () => {
+            ModalsManager.openModal('ticket-modal');
+            const titleInput = document.getElementById('ticket-title') as HTMLInputElement;
+            titleInput?.focus();
         });
 
-        form?.addEventListener('submit', async (e) => {
+        document.getElementById('close-modal-btn')?.addEventListener('click', () => {
+            this.closeModal(form);
+        });
+        document.getElementById('cancel-modal-btn')?.addEventListener('click', () => {
+            this.closeModal(form);
+        });
+
+        departmentSelect?.addEventListener('change', () => {
+            if (departmentSelect.value === 'other') {
+                if (customDeptGroup) customDeptGroup.style.display = '';
+                customDeptInput?.setAttribute('required', 'true');
+            } else {
+                if (customDeptGroup) customDeptGroup.style.display = 'none';
+                customDeptInput?.removeAttribute('required');
+                if (customDeptInput) customDeptInput.value = '';
+            }
+        });
+
+        form?.addEventListener('submit', async e => {
             e.preventDefault();
 
             const user = store.getState().currentUser;
             const titleInput = document.getElementById('ticket-title') as HTMLInputElement;
-            const descInput = document.getElementById('ticket-desc') as HTMLTextAreaElement;
+            const descInput = document.getElementById('ticket-description') as HTMLTextAreaElement;
             const categorySelect = document.getElementById('ticket-category') as HTMLSelectElement;
-            const departmentSelect = document.getElementById('ticket-department') as HTMLSelectElement;
-            const prioritySelect = document.getElementById('ticket-priority') as HTMLSelectElement;
             const severitySelect = document.getElementById('ticket-severity') as HTMLSelectElement;
-            const fileInput = document.getElementById('ticket-attachment') as HTMLInputElement;
+            const fileInput = document.getElementById('ticket-file') as HTMLInputElement;
+            const submitBtn = document.getElementById('submit-ticket-btn') as HTMLButtonElement;
 
-            if (!titleInput.value.trim() || !descInput.value.trim() || !departmentSelect.value) {
+            let department = departmentSelect?.value || '';
+            if (department === 'other') {
+                department = customDeptInput?.value.trim() || '';
+                if (!department) {
+                    showToast('Please specify the custom department', 'error');
+                    return;
+                }
+            }
+
+            if (
+                !titleInput?.value.trim() ||
+                !descInput?.value.trim() ||
+                !department ||
+                !severitySelect?.value
+            ) {
                 showToast('Please fill out all required fields', 'error');
                 return;
             }
 
             try {
+                if (submitBtn) {
+                    LoadingManager.setButtonLoading(submitBtn, true);
+                }
+
                 const newTicket = await ticketsAPI.create({
                     title: titleInput.value.trim(),
                     description: descInput.value.trim(),
-                    category: categorySelect.value,
-                    department: departmentSelect.value,
-                    priority: prioritySelect.value,
+                    category: categorySelect?.value || 'Other',
+                    department,
+                    priority: 'Medium',
                     severity: severitySelect.value,
                     requester: user ? user.username : 'Guest Requester',
                 });
 
-                // Upload attachment if selected
-                if (fileInput && fileInput.files && fileInput.files.length > 0) {
+                if (fileInput?.files?.length) {
                     try {
                         await ticketsAPI.uploadAttachment(newTicket.id, fileInput.files[0]);
                     } catch {
@@ -52,15 +94,30 @@ export class CreateTicketPage {
                 }
 
                 showToast('Support ticket created successfully!', 'success');
-                form.reset();
-                ModalsComponent.closeModal('create-ticket-modal');
+                this.closeModal(form);
 
-                // Re-fetch all tickets and notify store subscribers (Dashboard, Tickets, Admin) reactively
-                const updatedTickets = await ticketsAPI.getAll();
-                store.setTickets(updatedTickets);
-            } catch (err: any) {
-                showToast(err.message || 'Failed to create ticket', 'error');
+                await TicketsPage.load('my-tickets');
+            } catch (err: unknown) {
+                handleUIError(err, 'Failed to create ticket');
+            } finally {
+                if (submitBtn) {
+                    LoadingManager.setButtonLoading(submitBtn, false);
+                }
             }
         });
+    }
+
+    private static closeModal(form: HTMLFormElement | null): void {
+        ModalsManager.closeModal('ticket-modal');
+        form?.reset();
+        const customDeptGroup = document.getElementById('custom-dept-group');
+        const customDeptInput = document.getElementById(
+            'ticket-custom-department',
+        ) as HTMLInputElement;
+        if (customDeptGroup) customDeptGroup.style.display = 'none';
+        if (customDeptInput) {
+            customDeptInput.removeAttribute('required');
+            customDeptInput.value = '';
+        }
     }
 }

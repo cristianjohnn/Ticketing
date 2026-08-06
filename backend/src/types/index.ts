@@ -17,6 +17,31 @@ export interface Ticket {
     notes?: Note[];
     attachments?: Attachment[];
     ratingRequested?: number;
+    userId?: string;
+    primary_assignee_id?: string | null;
+    resolved_at?: string | null;
+    resolving_assignee_id?: string | null;
+    collaborators?: TicketCollaborator[];
+}
+
+export * from './rating.types';
+
+export interface TicketHistory {
+    id: string;
+    ticket_id: string;
+    actor_id: string;
+    event_type: string;
+    event_data: any;
+    created_at: string;
+}
+
+export interface TicketCollaborator {
+    ticket_id: string;
+    user_id: string;
+    role?: string;
+    created_at?: string;
+    username?: string;
+    fullName?: string;
 }
 
 export interface Note {
@@ -61,4 +86,15 @@ export interface Stats {
     critical: number;
     avgRating: string | null;
     rated: number;
+}
+
+export interface User {
+    id: string;
+    username: string;
+    fullName: string;
+    email: string;
+    role: string;
+    active: boolean;
+    createdAt?: string;
+    updatedAt?: string;
 }

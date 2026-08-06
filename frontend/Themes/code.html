@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title class="">DeskQueue // System Access</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'media',
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "secondary-fixed-dim": "#ffb3b2",
+                    "on-secondary": "#ffffff",
+                    "outline": "#7d7363",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#ffbf00",
+                    "inverse-primary": "#ffe2ab",
+                    "on-background": "#1a1c18",
+                    "surface-variant": "#e7e2d9",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#680012",
+                    "surface-container-low": "#f6f3eb",
+                    "background": "#fdfcfa",
+                    "surface-container-highest": "#e5e2da",
+                    "on-tertiary-container": "#1c1b1b",
+                    "on-primary-fixed-variant": "#5c4300",
+                    "surface-container-high": "#ebe7df",
+                    "on-tertiary-fixed-variant": "#313030",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffdad8",
+                    "tertiary": "#5d5e5e",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#795900",
+                    "tertiary-fixed": "#e5e2e1",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#410008",
+                    "on-primary-container": "#261a00",
+                    "outline-variant": "#cec6b4",
+                    "primary-fixed": "#ffdfa0",
+                    "surface": "#fdfcfa",
+                    "primary-fixed-dim": "#fbbc00",
+                    "on-secondary-container": "#410008",
+                    "on-surface": "#1a1c18",
+                    "surface-bright": "#fdfcfa",
+                    "surface-dim": "#dedad2",
+                    "inverse-surface": "#2f312c",
+                    "primary": "#795900",
+                    "secondary-container": "#ffdad8",
+                    "inverse-on-surface": "#f1f1ea",
+                    "secondary": "#92001e",
+                    "tertiary-container": "#ffffff",
+                    "surface-container": "#f0ebe4",
+                    "on-primary-fixed": "#261a00",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#410002",
+                    "on-surface-variant": "#49473a",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "dark-surface": "#131313",
+                    "dark-surface-container": "#1f1f1f",
+                    "dark-outline": "#353535",
+                    "dark-on-surface": "#e2e2e2",
+                    "dark-on-surface-variant": "#9c8f78"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "label-caps": [
+                            "Space Mono"
+                    ],
+                    "body-md": [
+                            "Geist"
+                    ],
+                    "body-lg": [
+                            "Geist"
+                    ],
+                    "display-lg": [
+                            "Space Grotesk"
+                    ],
+                    "mono-data": [
+                            "Space Mono"
+                    ],
+                    "headline-lg": [
+                            "Space Grotesk"
+                    ],
+                    "headline-md": [
+                            "Space Grotesk"
+                    ],
+                    "display-lg-mobile": [
+                            "Space Grotesk"
+                    ]
+            },
+            "fontSize": {
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "1.0",
+                                    "letterSpacing": "0.2em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg": [
+                            "72px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.04em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "mono-data": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "letterSpacing": "0em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-lg-mobile": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        /* Modern Brutalism & High-Energy Physics Aesthetic */
+        body {
+            overflow: hidden;
+        }
+
+        /* Energy Leak Glows */
+        .energy-leak {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .energy-leak:hover {
+            /* 10px directional outer glow on Y axis for "escaping light" */
+            box-shadow: 0 10px 30px -5px rgba(255, 191, 0, 0.3), 0 -10px 30px -5px rgba(255, 191, 0, 0.1);
+        }
+
+        /* Input Base Glow */
+        .input-chamber {
+            transition: border-color 0.2s, box-shadow 0.2s, color 0.3s, background-color 0.3s;
+        }
+        .input-chamber:focus {
+            outline: none;
+            border-bottom-width: 2px;
+            border-bottom-color: #ffbf00; /* primary-container */
+            box-shadow: 0 15px 25px -15px rgba(255, 191, 0, 0.3);
+        }
+
+        /* Technical Grid Overlay */
+        .tech-grid {
+            background-image: 
+                linear-gradient(to right, rgba(229, 226, 218, 0.5) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(229, 226, 218, 0.5) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tech-grid {
+                background-image: 
+                    linear-gradient(to right, rgba(53, 53, 53, 0.5) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(53, 53, 53, 0.5) 1px, transparent 1px);
+            }
+            .crosshair::before, .crosshair::after {
+                background-color: #353535 !important;
+            }
+        }
+
+        /* Corner Crosshairs */
+        .crosshair::before, .crosshair::after {
+            content: '';
+            position: absolute;
+            background-color: #cec6b4; /* outline-variant */
+            transition: background-color 0.3s;
+        }
+        .crosshair-tl::before { top: -5px; left: 0; width: 1px; height: 10px; }
+        .crosshair-tl::after { top: 0; left: -5px; width: 10px; height: 1px; }
+
+        .crosshair-br::before { bottom: -5px; right: 0; width: 1px; height: 10px; }
+        .crosshair-br::after { bottom: 0; right: -5px; width: 10px; height: 1px; }
+
+        /* Status Notch */
+        .status-notch {
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+        }
+
+        /* Shimmer Effect for Data Overlays */
+        @keyframes subtle-shimmer {
+            0% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.5; }
+        }
+        .animate-data-shimmer {
+            animation: subtle-shimmer 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen w-full flex flex-col md:flex-row bg-[#F5F5F5] dark:bg-dark-surface text-on-surface dark:text-dark-on-surface transition-colors duration-300">
+<!-- Left Visual Chamber (Hidden on Mobile) -->
+<div class="hidden md:flex md:w-1/2 lg:w-[55%] relative border-r border-surface-container-highest dark:border-dark-outline tech-grid overflow-hidden transition-colors duration-300">
+<!-- Background Imagery -->
+<div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-multiply dark:mix-blend-screen" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida/AP1WRLuFY_mBLUfbQ_V5-4AWYehYpfOk2o_lDqq0VC4In-OGTRVsHi1yqsCA680oHQrOVnt5Cn2XFsoMPzRVwVZpLk0g3tbE8Jo-Y3OKT42Nb0iGRFDKx4KZLbWIqobIUaaub6d50mGwlGIBXhkHCUfQEfXYFjnBQ6th17ZNP5lFWA-WBMiMogAYMIiDfGiaIAQ2YTCEn1pFmbxw-AVM-Cx-4hF1hbYTZZ6F3l-LG_tFGZ8lFNUwE96Kwg1v4bQ&quot;);"></div>
+<!-- Gradient Fade to absolute black -->
+<div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#F5F5F5] dark:to-dark-surface transition-colors duration-300"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#F5F5F5] dark:from-dark-surface via-transparent to-transparent transition-colors duration-300"></div>
+<!-- Technical Overlays -->
+<div class="absolute top-margin-desktop left-margin-desktop z-10 flex flex-col gap-4 animate-data-shimmer">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary dark:text-[#ffbf00] transition-colors duration-300" style="font-variation-settings: 'FILL' 1;">sensors</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant dark:text-dark-on-surface-variant transition-colors duration-300 uppercase">Core Telemetry Active</span>
+</div>
+<div class="font-mono-data text-mono-data text-on-surface-variant dark:text-dark-on-surface-variant transition-colors duration-300 text-xs opacity-80">
+                SEQ_ID: 0x8F9A.C1<br>
+                FLUX_VARIANCE: ±0.004%<br>
+                CONTAINMENT: STABLE
+            </div>
+</div>
+<!-- Brand Anchor -->
+<div class="absolute bottom-margin-desktop left-margin-desktop z-10">
+<div class="flex flex-col gap-2">
+<div class="w-24 h-24 mb-4 relative overflow-hidden mix-blend-multiply drop-shadow-[0_0_10px_rgba(255,191,0,0.3)] drop-shadow-[0_0_20px_rgba(255,191,0,0.4)] dark:mix-blend-screen">
+<img alt="DeskQueue Logo" class="w-full h-full object-contain mix-blend-screen drop-shadow-[0_0_15px_rgba(255,191,0,0.6)]" src="https://lh3.googleusercontent.com/aida/AP1WRLvu2f6B0t78PiUgPL6z2kGdOyNHXgenwgs6nO8Vu9Js1Hw3YPuAHeP1_NSL6YFK2zX9-eKrlgIrmenH5qybgbrs-0dYK94Pol0Swu9oxh-BSm2LJmP8JGXqHuBCh4cH4Z0sxqYiyXxXZPl7TdI85T-4XGmHE7HwcidHvhim0r187BrZ711WM2Sy7DHsrGpVbv_TUPUkHjnDkx1ZoTpnnK2HCBpI1nJrOQpNcYjZOa-zcRyqCU06VrvLlg">
+</div>
+<h1 class="font-display-lg text-display-lg text-primary dark:text-[#ffbf00] tracking-tighter uppercase leading-none mix-blend-multiply dark:mix-blend-normal drop-shadow-[0_0_15px_rgba(255,191,0,0.4)] transition-colors duration-300">
+                DESKQUEUE
+            </h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant dark:text-dark-on-surface-variant tracking-widest opacity-80">
+                INTELLIGENT WORKFLOW, SEAMLESS SUPPORT.
+            </p>
+</div>
+</div>
+<!-- Crosshairs on visual panel -->
+<div class="absolute top-8 right-8 crosshair crosshair-tr"></div>
+<div class="absolute bottom-8 right-8 crosshair crosshair-br"></div>
+</div>
+<!-- Right Interaction Chamber (Login) -->
+<div class="w-full md:w-1/2 lg:w-[45%] flex items-center justify-center p-margin-mobile md:p-margin-desktop relative">
+<!-- Brutalist Login Container -->
+<div class="w-full max-w-md relative bg-white/80 dark:bg-dark-surface-container/80 backdrop-blur-md border border-surface-container-highest dark:border-dark-outline transition-colors duration-300 p-8 md:p-12 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]">
+<!-- Corner Crosshairs -->
+<div class="absolute top-0 left-0 crosshair crosshair-tl"></div>
+<div class="absolute bottom-0 right-0 crosshair crosshair-br"></div>
+<!-- Active Status Notch -->
+<div class="absolute top-0 right-0 w-6 h-6 bg-primary-container status-notch"></div>
+<!-- Form Header -->
+<div class="mb-12">
+<p class="font-label-caps text-label-caps text-primary dark:text-[#ffbf00] mb-4 flex items-center gap-2 transition-colors duration-300">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                    AUTHENTICATION // SECURE_LINK
+                </p>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface dark:text-dark-on-surface tracking-tight uppercase transition-colors duration-300">
+                    System Access
+                </h2>
+</div>
+<!-- Input Fields -->
+<form class="flex flex-col gap-8">
+<!-- Operator ID (Email/Username) -->
+<div class="relative flex flex-col">
+<label class="font-label-caps text-label-caps text-on-surface-variant dark:text-dark-on-surface-variant mb-2 transition-colors duration-300" for="operator_id">OPERATOR_ID</label>
+<input autocomplete="username" class="input-chamber w-full bg-transparent border-b border-surface-container-highest dark:border-dark-outline text-on-surface dark:text-dark-on-surface font-mono-data text-mono-data py-2 pl-0 focus:ring-0 placeholder:text-outline-variant dark:placeholder:text-dark-on-surface-variant/50 transition-colors duration-300" id="operator_id" placeholder="Enter designated identifier" type="text">
+</div>
+<!-- Access Key (Password) -->
+<div class="relative flex flex-col">
+<label class="font-label-caps text-label-caps text-on-surface-variant dark:text-dark-on-surface-variant mb-2 flex justify-between transition-colors duration-300" for="access_key">
+<span class="">ACCESS_KEY</span>
+</label>
+<div class="relative w-full">
+<input autocomplete="current-password" class="input-chamber w-full bg-transparent border-b border-surface-container-highest dark:border-dark-outline text-on-surface dark:text-dark-on-surface font-mono-data text-mono-data py-2 pl-0 pr-10 focus:ring-0 placeholder:text-outline-variant dark:placeholder:text-dark-on-surface-variant/50 transition-colors duration-300" id="access_key" placeholder="••••••••••••" type="password">
+<button class="absolute right-0 top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-dark-on-surface-variant hover:text-primary dark:hover:text-[#ffbf00] transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Primary Action Button -->
+<button class="mt-6 w-full bg-primary-container text-on-primary-container font-label-caps text-label-caps py-4 px-6 uppercase tracking-[0.2em] energy-leak flex items-center justify-center gap-3 relative overflow-hidden group" type="submit">
+<span class="relative z-10 font-bold">Initialize Connection</span>
+<span class="material-symbols-outlined relative z-10 text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+<!-- Internal hover pulse -->
+<div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+</button>
+</form>
+<!-- Auxiliary Links (Ghost Buttons) -->
+<div class="mt-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-surface-container-highest dark:border-dark-outline transition-colors duration-300 pt-6">
+<button class="font-mono-data text-mono-data text-on-surface-variant dark:text-dark-on-surface-variant hover:text-primary dark:hover:text-[#ffbf00] transition-colors flex items-center gap-1 uppercase text-xs">
+<span class="text-primary-container">+</span> FORGOT CREDENTIALS?
+                </button>
+<button class="font-mono-data text-mono-data text-on-surface-variant dark:text-dark-on-surface-variant hover:text-primary dark:hover:text-[#ffbf00] transition-colors flex items-center gap-1 uppercase text-xs">
+<span class="text-primary-container">+</span> REQUEST ACCESS
+                </button>
+</div>
+</div>
+<!-- Minimal Footer Text for pure transaction pages -->
+<div class="absolute bottom-8 text-center w-full max-w-md mx-auto hidden md:block opacity-60">
+<p class="font-mono-data text-[10px] text-on-surface-variant dark:text-dark-on-surface-variant transition-colors duration-300 uppercase tracking-widest">
+                SYSTEM_PROTOCOL_v4.0.2 // ENCRYPTION_ACTIVE
+            </p>
+</div>
+</div>
+
+
+
+
+</body></html>

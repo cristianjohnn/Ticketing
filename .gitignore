@@ -26,3 +26,47 @@ backend/uploads/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Testing & Logs
+playwright-report/
+test-results/
+*.log
+
+# Cache/Temp
+.vite-temp/
+.eslintcache
+
+# ==================================================
+# AI Workspace Configuration
+# ==================================================
+.agents/
+.agent/
+.cursor/
+.cursorrules
+.clinerules
+.gemini/
+
+# ==================================================
+# IDE Configuration
+# ==================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==================================================
+# Temporary & QA Artifacts
+# ==================================================
+scratch/
+scratch.*
+tmp/
+temp/
+coverage/
+/*.png
+/*.jpg
+/*.mp4
+
+# ==================================================
+# Documentation
+# ==================================================
+docs/

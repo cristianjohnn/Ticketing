@@ -1,0 +1,17 @@
+/* =========================================
+   Design Language: Standard (Base)
+   ========================================= */
+
+/* 
+  The Standard Design Language is the clean, unopinionated enterprise base. 
+  It directly uses the Component Tokens defined in light.css and dark.css without heavy overrides. 
+*/
+
+:root, [data-design-language="standard"] {
+    --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    --font-heading: var(--font);
+    
+    --radius: 8px;
+    --radius-sm: 4px;
+    --radius-lg: 12px;
+}

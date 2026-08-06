@@ -1,0 +1,131 @@
+/* =========================================
+   Topbar & Header
+   Styles for the top navigation and filters.
+   ========================================= */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-bg-surface);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    position: relative;
+    z-index: 50;
+}
+.page-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-text-heading);
+}
+
+.filter-row {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+}
+.search-box {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+.search-box svg {
+    position: absolute;
+    left: 8px;
+    color: var(--color-text-secondary);
+    pointer-events: none;
+}
+.search-box input[type="text"] {
+    padding: 6px 11px 6px 28px;
+    background: var(--input-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-text-primary);
+    font-size: 12px;
+    outline: none;
+    width: 200px;
+    font-family: var(--font);
+    transition: 
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard),
+        background-color var(--duration-fast) var(--ease-standard);
+}
+.search-box input[type="text"]:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: var(--input-focus-ring);
+}
+.filter-sel {
+    padding: 6px 9px;
+    background: var(--input-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-text-primary);
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: 
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard),
+        background-color var(--duration-fast) var(--ease-standard);
+}
+.filter-sel:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: var(--input-focus-ring);
+}
+
+/* ──── Topbar Actions Container ──── */
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+/* Theme toggle integrated within topbar – no margin/position overrides */
+.topbar-actions .theme-toggle {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .topbar {
+        padding: 10px 16px;
+    }
+    .page-title {
+        font-size: 15px;
+    }
+    .filter-row {
+        width: 100%;
+    }
+    .search-box {
+        width: 100%;
+    }
+    .search-box input[type="text"] {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .topbar {
+        padding: 8px 10px;
+    }
+    .page-title {
+        font-size: 14px;
+    }
+    .theme-toggle {
+        padding: 6px 10px !important;
+        font-size: 12px !important;
+    }
+    .theme-toggle span:last-child {
+        display: none;
+    }
+}

@@ -1,0 +1,112 @@
+/* =========================================
+   Loaders & Skeletons
+   ========================================= */
+
+/* ---- Button Loader ---- */
+.btn.is-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn.is-loading::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1.2em;
+    height: 1.2em;
+    margin-left: -0.6em;
+    margin-top: -0.6em;
+    border: 2px solid var(--color-primary-bg-subtle);
+    border-radius: 50%;
+    border-top-color: currentColor;
+    animation: btn-spin 0.6s linear infinite;
+}
+
+.btn-secondary.is-loading::after,
+.btn-ghost.is-loading::after {
+    border: 2px solid var(--color-border);
+    border-top-color: var(--color-primary);
+}
+
+@keyframes btn-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---- Skeletons (Theme-Adaptive Shimmer) ---- */
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--skeleton-bg);
+    border-radius: var(--radius-sm);
+}
+
+.skeleton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--skeleton-shimmer);
+    transform: translateX(-100%);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Base Skeleton Shapes */
+.skeleton-text {
+    height: 14px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.skeleton-text.short {
+    width: 60%;
+}
+
+.skeleton-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.skeleton-btn {
+    height: 36px;
+    width: 100px;
+}
+
+/* ---- Global Overlay Loader ---- */
+.global-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--modal-overlay);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.global-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.global-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--color-primary-bg-subtle);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: btn-spin 1s linear infinite;
+}

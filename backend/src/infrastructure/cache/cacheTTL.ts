@@ -1,0 +1,8 @@
+import { ENV } from '../../config/env';
+
+export const CacheTTL = {
+    DEFAULT: ENV.CACHE_DEFAULT_TTL,
+    STATS: ENV.CACHE_STATS_TTL,
+    ANALYTICS: ENV.CACHE_ANALYTICS_TTL,
+    TICKETS: ENV.CACHE_TICKETS_TTL
+};

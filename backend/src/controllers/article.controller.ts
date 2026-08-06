@@ -2,19 +2,19 @@ import { Request, Response, NextFunction } from 'express';
 import { ArticleService } from '../services/article.service';
 
 export class ArticleController {
-    public static getAll(req: Request, res: Response, next: NextFunction): void {
+    public static async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const { search } = req.query;
-            const articles = ArticleService.getAll(search as string);
+            const articles = await ArticleService.getAll(search as string);
             res.json(articles);
         } catch (err) {
             next(err);
         }
     }
 
-    public static getById(req: Request, res: Response, next: NextFunction): void {
+    public static async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const article = ArticleService.getById(String(req.params.id));
+            const article = await ArticleService.getById(String(req.params.id));
             if (!article) {
                 res.status(404).json({ error: 'Article not found' });
                 return;
@@ -25,7 +25,7 @@ export class ArticleController {
         }
     }
 
-    public static create(req: Request, res: Response, next: NextFunction): void {
+    public static async create(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const { title, content, category = 'General', author = 'Admin' } = req.body;
 
@@ -39,7 +39,7 @@ export class ArticleController {
                 return;
             }
 
-            const article = ArticleService.create({
+            const article = await ArticleService.create({
                 title: title.trim(),
                 content: content.trim(),
                 category,
@@ -52,11 +52,11 @@ export class ArticleController {
         }
     }
 
-    public static update(req: Request, res: Response, next: NextFunction): void {
+    public static async update(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const { title, content, category } = req.body;
             
-            const article = ArticleService.update(String(req.params.id), {
+            const article = await ArticleService.update(String(req.params.id), {
                 title,
                 content,
                 category
@@ -73,9 +73,9 @@ export class ArticleController {
         }
     }
 
-    public static delete(req: Request, res: Response, next: NextFunction): void {
+    public static async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const success = ArticleService.delete(String(req.params.id));
+            const success = await ArticleService.delete(String(req.params.id));
             if (!success) {
                 res.status(404).json({ error: 'Article not found' });
                 return;
@@ -86,7 +86,7 @@ export class ArticleController {
         }
     }
 
-    public static reorder(req: Request, res: Response, next: NextFunction): void {
+    public static async reorder(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const { order } = req.body;
 
@@ -96,7 +96,7 @@ export class ArticleController {
                 return;
             }
 
-            ArticleService.reorder(order);
+            await ArticleService.reorder(order);
             res.json({ success: true });
         } catch (err) {
             next(err);

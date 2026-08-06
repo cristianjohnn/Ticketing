@@ -1,0 +1,109 @@
+/* =========================================
+   Widgets
+   Complex components (stars, charts, lists).
+   ========================================= */
+
+/* ──── Department Bar Chart ──── */
+.dept-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+.dept-bar-label {
+    color: var(--color-text-secondary);
+    font-size: 12px;
+    width: 140px;
+    flex-shrink: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dept-bar-track {
+    flex: 1;
+    height: 5px;
+    background: var(--color-bg-base);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.dept-bar-fill {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+.dept-bar-count {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 12px;
+    min-width: 14px;
+    text-align: right;
+}
+
+
+/* ──── Assignee Checklist ──── */
+.assignee-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.assignee-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    user-select: none;
+}
+.assignee-check:hover {
+    background: var(--color-bg-surface-hover);
+    color: var(--color-text-primary);
+}
+.assignee-check input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ──── Stars ──── */
+.stars {
+    display: flex;
+    gap: 1px;
+}
+.stars .star {
+    font-size: 18px;
+    transition: var(--transition);
+}
+.stars .star.off {
+    filter: grayscale(1) opacity(0.2);
+}
+.stars.stars-sm .star {
+    font-size: 12px;
+}
+
+/* ──── Rating Stars (modal) ──── */
+.rating-star {
+    font-size: 36px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 2px;
+    filter: grayscale(1) opacity(0.3);
+    transition:
+        transform 0.15s ease,
+        filter 0.15s ease;
+}
+.rating-star:hover {
+    transform: scale(1.15);
+}
+.rating-star.active {
+    filter: none;
+}
+

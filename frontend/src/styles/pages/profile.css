@@ -1,0 +1,278 @@
+/* =========================================
+   Profile Page – Elevated Design
+   ========================================= */
+
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
+}
+
+/* ──── Profile Card (Hero Section) ──── */
+.profile-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    transition:
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.profile-card:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-md);
+}
+
+/* Decorative accent strip along top */
+.profile-card-accent {
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 60%, transparent));
+}
+
+.profile-card-body {
+    padding: var(--space-xl) var(--space-xl) var(--space-lg);
+}
+
+/* ──── Profile Header (Avatar + Name) ──── */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 70%, #000));
+    color: var(--btn-primary-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow:
+        0 0 0 3px var(--color-bg-surface),
+        0 0 0 5px color-mix(in srgb, var(--color-primary) 25%, transparent);
+    letter-spacing: -0.02em;
+}
+
+.profile-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text-heading);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.profile-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+    color: var(--color-primary);
+    border: 1px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+    margin-top: var(--space-2xs);
+}
+
+/* ──── Info Grid ──── */
+.profile-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+@media (max-width: 560px) {
+    .profile-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.profile-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Span full width for the last item when odd count */
+.profile-info-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - var(--space-md) / 2);
+}
+
+.profile-info-item label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.profile-info-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    padding: 10px var(--space-md);
+    background: var(--input-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.profile-info-value:hover {
+    border-color: var(--color-border-hover);
+}
+
+.profile-info-value .status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: var(--space-xs);
+    flex-shrink: 0;
+}
+
+.profile-info-value .status-dot.active {
+    background: var(--color-success);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--color-success) 60%, transparent);
+}
+
+/* ──── Security Section ──── */
+.profile-security-card {
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-xl);
+    transition:
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.profile-security-card:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.profile-section-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 var(--space-xs) 0;
+    color: var(--color-text-heading);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    letter-spacing: -0.01em;
+}
+
+.profile-section-title svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+.profile-section-subtitle {
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 var(--space-lg) 0;
+    line-height: 1.5;
+}
+
+/* ──── Password Form ──── */
+.change-password-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 440px;
+}
+
+.change-password-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.change-password-form .form-group label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+}
+
+.change-password-form .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.change-password-form .form-control {
+    width: 100%;
+    padding: 10px 44px 10px var(--space-md);
+    background: var(--input-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-primary);
+    font-size: 0.9rem;
+    min-height: 42px;
+    transition:
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.change-password-form .form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--duration-fast) var(--ease-standard), background-color var(--duration-fast) var(--ease-standard);
+}
+
+.password-toggle-btn:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-surface-hover);
+}
+
+.password-hint {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    opacity: 0.8;
+}
+
+.change-password-form .btn {
+    margin-top: var(--space-xs);
+    align-self: flex-start;
+    min-width: 180px;
+}

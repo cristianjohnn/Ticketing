@@ -1,0 +1,286 @@
+/* =========================================
+   Ticket Detail
+   ========================================= */
+
+/* ──── Ticket Detail ──── */
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-md);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+}
+.detail-id {
+    font-family: monospace;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+}
+.detail-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-heading);
+}
+.detail-badges {
+    display: flex;
+    gap: 7px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-primary-bg-subtle);
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: var(--transition);
+    border: 1px solid var(--badge-info-border);
+    box-shadow: var(--shadow-sm);
+}
+.btn-back:hover {
+    background: var(--color-primary);
+    color: var(--btn-primary-text);
+    transform: translateX(-4px);
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 290px;
+    gap: var(--space-md);
+}
+.detail-grid-client {
+    grid-template-columns: 1fr 260px;
+}
+.detail-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+.detail-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+/* ──── Ticket Workspace Motion Orchestration ──── */
+/* 
+ * The Ticket Workspace is rendered inside a modal. 
+ * We use the .modal-overlay.is-opening / .is-open / .is-closing lifecycle 
+ * to orchestrate the entrance staggers. 
+ */
+
+.modal-overlay:not(.is-open) .detail-header {
+    opacity: var(--opacity-hidden);
+    transform: translateY(var(--motion-distance-md));
+}
+.modal-overlay:not(.is-open) .detail-main {
+    opacity: var(--opacity-hidden);
+    transform: translateY(var(--motion-distance-lg));
+}
+.modal-overlay:not(.is-open) .detail-side {
+    opacity: var(--opacity-hidden);
+    transform: translateX(var(--motion-distance-md));
+}
+
+.modal-overlay.is-open .detail-header,
+.modal-overlay.is-open .detail-main,
+.modal-overlay.is-open .detail-side {
+    opacity: var(--opacity-visible);
+    transform: translate(0);
+}
+
+/* Apply staggered transitions when opening */
+.modal-overlay.is-opening .detail-header,
+.modal-overlay.is-open .detail-header {
+    transition: 
+        opacity var(--duration-normal) var(--ease-decelerate),
+        transform var(--duration-normal) var(--ease-decelerate);
+    transition-delay: var(--stagger-1);
+}
+
+.modal-overlay.is-opening .detail-main,
+.modal-overlay.is-open .detail-main {
+    transition: 
+        opacity var(--duration-normal) var(--ease-decelerate),
+        transform var(--duration-normal) var(--ease-decelerate);
+    transition-delay: var(--stagger-2);
+}
+
+.modal-overlay.is-opening .detail-side,
+.modal-overlay.is-open .detail-side {
+    transition: 
+        opacity var(--duration-normal) var(--ease-decelerate),
+        transform var(--duration-normal) var(--ease-decelerate);
+    transition-delay: var(--stagger-3);
+}
+
+/* Fast exit when closing (override delay) */
+.modal-overlay.is-closing .detail-header,
+.modal-overlay.is-closing .detail-main,
+.modal-overlay.is-closing .detail-side {
+    transition: 
+        opacity var(--duration-fast) var(--ease-accelerate),
+        transform var(--duration-fast) var(--ease-accelerate);
+    transition-delay: 0s;
+}
+
+.detail-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 13px;
+}
+.detail-info-key {
+    color: var(--color-text-secondary);
+}
+.detail-info-val {
+    color: var(--color-text-secondary);
+    text-align: right;
+    max-width: 130px;
+}
+
+/* ──── Prop Group (admin detail sidebar) ──── */
+.prop-group {
+    margin-bottom: 10px;
+}
+.prop-group label {
+    display: block;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.prop-group select {
+    width: 100%;
+    padding: 7px 10px;
+    font-size: 13px;
+}
+
+/* ──── Activity Log ──── */
+.note-item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+.note-item:last-child {
+    border-bottom: none;
+}
+.note-author {
+    font-size: 11px;
+    color: var(--badge-info-text);
+    font-weight: 700;
+}
+.note-time {
+    color: var(--color-text-secondary);
+    font-weight: 400;
+    margin-left: 6px;
+}
+.note-text {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+    line-height: 1.5;
+}
+.note-mine {
+    background: var(--badge-info-bg);
+    border-left: 3px solid var(--badge-info-text);
+    padding: 10px 12px;
+    border-radius: 0 8px 8px 0;
+    margin-left: 16px;
+}
+.note-mine .note-author {
+    color: var(--color-primary);
+}
+
+/* ──── Empty State ──── */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2xl) var(--space-lg);
+    text-align: center;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+}
+.empty-state-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+    opacity: 0.5;
+}
+.empty-state-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xs);
+}
+
+/* ──── Rating Comment Card ──── */
+.rating-comment {
+    padding: 10px 14px;
+    background: var(--badge-warning-text-bg);
+    border-radius: 7px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    border-left: 3px solid var(--badge-warning-text);
+    margin-top: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .detail-grid,
+    .detail-grid-client {
+        grid-template-columns: 1fr;
+    }
+    .detail-side {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .detail-header {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .detail-title {
+        font-size: 1.1rem;
+    }
+    .btn-back {
+        margin-left: 0;
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .detail-header {
+        gap: 8px;
+    }
+    .detail-id {
+        font-size: 10px;
+    }
+    .detail-title {
+        font-size: 1rem;
+    }
+    .detail-badges {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    .note-compose textarea {
+        min-height: 60px !important;
+    }
+}

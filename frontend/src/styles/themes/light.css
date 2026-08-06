@@ -1,0 +1,152 @@
+/* =========================================
+   Appearance: Light (Standard Base)
+   Premium modern SaaS light mode.
+   ========================================= */
+[data-color-mode="light"] {
+    /* 1. SEMANTIC TOKENS */
+    --color-primary: #4f46e5; /* Electric Indigo — vibrant, modern, premium */
+    --color-primary-hover: #4338ca;
+    --color-primary-bg-subtle: rgba(79, 70, 229, 0.08);
+    
+    --color-success: #16a34a;
+    --color-success-hover: #15803d;
+    --color-success-bg-subtle: rgba(22, 163, 74, 0.08);
+    
+    --color-warning: #d97706;
+    --color-warning-hover: #b45309;
+    --color-warning-bg-subtle: rgba(217, 119, 6, 0.08);
+    
+    --color-danger: #dc2626;
+    --color-danger-hover: #b91c1c;
+    --color-danger-bg-subtle: rgba(220, 38, 38, 0.06);
+
+    --color-info: #0284c7;
+    --color-info-hover: #0369a1;
+    --color-info-bg-subtle: rgba(2, 132, 199, 0.08);
+
+    --color-bg-base: #f8fafc; /* Cool off-white — not flat gray */
+    --color-bg-surface: #ffffff;
+    --color-bg-surface-hover: #f1f5f9;
+    --color-bg-overlay: rgba(15, 23, 42, 0.6);
+
+    --color-border: #e2e8f0; /* Slate border — soft, refined */
+    --color-border-hover: #cbd5e1;
+
+    --color-text-primary: #0f172a; /* Slate 900 — rich, deep */
+    --color-text-secondary: #475569; /* Slate 600 */
+    --color-text-muted: #94a3b8; /* Slate 400 */
+    --color-text-heading: #0f172a;
+    --color-text-inverse: #ffffff;
+
+    --color-shadow: rgba(15, 23, 42, 0.08);
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+    --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    --shadow-xl: 0 20px 50px -12px rgba(15, 23, 42, 0.15);
+
+    /* 2. COMPONENT TOKENS */
+    
+    /* Layout — Light Sidebar */
+    --sidebar-bg: #ffffff;
+    --sidebar-text: #64748b; /* Slate 500 */
+    --sidebar-heading: #0f172a; /* Slate 900 */
+    --sidebar-hover-bg: #f1f5f9;
+    --sidebar-hover-text: #0f172a;
+    --sidebar-active-bg: #eef2ff;
+    --sidebar-active-text: #4f46e5;
+    --sidebar-border: #e2e8f0;
+    --sidebar-card-bg: #f8fafc;
+    --sidebar-card-border: #e2e8f0;
+    --sidebar-accent: #4f46e5;
+
+    /* Buttons */
+    --btn-primary-bg: var(--color-primary);
+    --btn-primary-hover: var(--color-primary-hover);
+    --btn-primary-text: var(--color-text-inverse);
+    --btn-primary-border: transparent;
+    --btn-primary-shadow: 0 1px 3px rgba(79, 70, 229, 0.3), 0 1px 2px rgba(79, 70, 229, 0.2);
+    --btn-primary-shadow-hover: 0 4px 12px rgba(79, 70, 229, 0.35), 0 2px 4px rgba(79, 70, 229, 0.2);
+
+    --btn-secondary-bg: var(--color-bg-surface);
+    --btn-secondary-hover: var(--color-bg-surface-hover);
+    --btn-secondary-text: var(--color-text-primary);
+    --btn-secondary-border: var(--color-border);
+    --btn-secondary-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+
+    --btn-danger-bg: var(--color-danger);
+    --btn-danger-hover: var(--color-danger-hover);
+    --btn-danger-text: var(--color-text-inverse);
+
+    --btn-radius: 6px;
+
+    /* Inputs */
+    --input-bg: var(--color-bg-surface);
+    --input-border: var(--color-border);
+    --input-text: var(--color-text-primary);
+    --input-placeholder: var(--color-text-muted);
+    --input-focus-border: var(--color-primary);
+    --input-focus-ring: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    --input-radius: 6px;
+
+    /* Switches */
+    --switch-track: #cbd5e1;
+    --switch-track-active: var(--color-primary);
+    --switch-thumb: #ffffff;
+    --switch-thumb-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+
+    /* Cards & Modals */
+    --card-bg: var(--color-bg-surface);
+    --card-border: var(--color-border);
+    --card-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+    
+    --modal-bg: var(--color-bg-surface);
+    --modal-border: var(--color-border);
+    --modal-shadow: var(--shadow-xl);
+
+    /* Skeleton */
+    --skeleton-bg: #e2e8f0;
+    --skeleton-shimmer: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.4) 20%,
+        rgba(255, 255, 255, 0.8) 60%,
+        rgba(255, 255, 255, 0) 100%
+    );
+
+    --modal-overlay: var(--color-bg-overlay);
+
+    /* Badges */
+    --badge-radius: 4px;
+    --badge-font-weight: 600;
+
+    --badge-success-bg: var(--color-success-bg-subtle);
+    --badge-success-text: #065f46;
+    --badge-success-border: transparent;
+
+    --badge-warning-bg: var(--color-warning-bg-subtle);
+    --badge-warning-text: #92400e;
+    --badge-warning-border: transparent;
+
+    --badge-danger-bg: var(--color-danger-bg-subtle);
+    --badge-danger-text: #991b1b;
+    --badge-danger-border: transparent;
+
+    --badge-info-bg: var(--color-info-bg-subtle);
+    --badge-info-text: #075985;
+    --badge-info-border: transparent;
+
+    --badge-neutral-bg: #f1f5f9;
+    --badge-neutral-text: var(--color-text-secondary);
+    --badge-neutral-border: transparent;
+
+    /* Tables */
+    --table-head-bg: #f8fafc;
+    --table-head-text: var(--color-text-secondary);
+    --table-row-hover: #f1f5f9;
+    --table-border: var(--color-border);
+    
+    /* Scrollbar */
+    --scrollbar-track: transparent;
+    --scrollbar-thumb: #cbd5e1;
+    --scrollbar-thumb-hover: #94a3b8;
+}
