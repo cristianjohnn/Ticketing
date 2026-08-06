@@ -1,0 +1,27 @@
+# Git
+.git
+.gitignore
+
+# Dependencies (each service installs its own in Docker)
+node_modules/
+
+# Environment files
+.env
+*.env.local
+
+# Database files
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# IDE
+.vscode
+.agent
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads (mounted as volume)
+uploads/

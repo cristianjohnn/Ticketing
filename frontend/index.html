@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IT Support Ticketing System - Submit and manage support tickets efficiently">
+    <title>IT Support Ticketing System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+
+    <!-- Global Theme Toggle -->
+    <button class="theme-toggle global-theme-toggle" id="global-theme-toggle">
+        <span class="theme-icon">🌙</span>
+        <span>Dark Mode</span>
+    </button>
+
+    <!-- ==================== LOGIN SCREEN ==================== -->
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <div class="login-card glass-card">
+                <div class="login-logo">
+                    <div class="logo-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <path d="M9 12l2 2 4-4" />
+                        </svg>
+                    </div>
+                    <h1>IT Support</h1>
+                    <p class="login-subtitle">Ticketing System</p>
+                </div>
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label for="login-role">Login as</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="8.5" cy="7" r="4" />
+                                <path d="M20 8v6" />
+                                <path d="M23 11h-6" />
+                            </svg>
+                            <select id="login-role">
+                                <option value="client">Client</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="username-group">
+                        <label for="login-username">Name</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                            <input type="text" id="login-username" placeholder="Enter your name" required>
+                        </div>
+                    </div>
+                    <div class="form-group" id="password-group" style="display:none">
+                        <label for="login-password">Password</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                            </svg>
+                            <input type="password" id="login-password" placeholder="Enter admin password">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-login" id="login-btn">
+                        <span>Sign In</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14" />
+                            <path d="M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CLIENT PORTAL ==================== -->
+    <div id="client-screen" class="screen">
+        <div class="app-shell">
+            <!-- Client Sidebar -->
+            <aside class="sidebar" id="client-sidebar">
+                <div class="sb-brand">
+                    <div class="sb-logo-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <path d="M9 12l2 2 4-4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="sb-brand-name">Ticketing System</div>
+                        <div class="sb-brand-role">Client Portal</div>
+                    </div>
+                </div>
+
+                <div class="sb-user-card">
+                    <div class="sb-user-label">LOGGED IN AS</div>
+                    <div class="sb-user-name" id="client-sidebar-name">User</div>
+                </div>
+
+                <nav class="sb-nav">
+                    <button class="sb-nav-btn active" data-view="my-tickets">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        <span>My Tickets</span>
+                        <span class="sb-badge sb-badge-rating" id="client-to-rate-badge" style="display:none">0 to rate</span>
+                    </button>
+                    <button class="sb-nav-btn" data-view="knowledge-base">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                        <span>Knowledge Base</span>
+                    </button>
+                </nav>
+
+                <div class="sb-stats-box">
+                    <div class="sb-stats-label">MY TICKETS</div>
+                    <div class="sb-stats-row"><span class="sb-stats-key">Open</span><span class="sb-stats-val" style="color:var(--status-open)" id="cs-open">0</span></div>
+                    <div class="sb-stats-row"><span class="sb-stats-key">Active</span><span class="sb-stats-val" style="color:var(--accent)" id="cs-active">0</span></div>
+                    <div class="sb-stats-row"><span class="sb-stats-key">Resolved</span><span class="sb-stats-val" style="color:var(--status-resolved)" id="cs-resolved">0</span></div>
+                </div>
+
+                <div class="sb-bottom">
+
+                    <button class="btn btn-primary sb-new-btn" id="client-new-ticket-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Submit Ticket
+                    </button>
+                    <button class="btn btn-ghost sb-logout-btn" id="client-logout-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Logout
+                    </button>
+                </div>
+            </aside>
+
+            <div class="sidebar-overlay" id="client-sidebar-overlay"></div>
+            <!-- Client Main Area -->
+            <div class="main-area">
+                <header class="topbar">
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <button class="sidebar-toggle" id="client-sidebar-toggle">☰</button>
+                        <h1 class="page-title" id="client-page-title">My Tickets</h1>
+                    </div>
+                </header>
+                <div class="content-area" id="client-content">
+                    <!-- Dynamically rendered -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ADMIN PANEL ==================== -->
+    <div id="admin-screen" class="screen">
+        <div class="app-shell">
+            <!-- Notification Banner -->
+            <div class="notif-banner" id="notif-banner" style="display:none">
+                <span id="notif-msg"></span>
+                <button class="notif-close" id="notif-close">&times;</button>
+            </div>
+
+            <!-- Admin Sidebar -->
+            <aside class="sidebar sidebar-admin" id="admin-sidebar">
+                <div class="sb-brand">
+                    <div class="sb-logo-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <path d="M9 12l2 2 4-4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="sb-brand-name">Ticketing System</div>
+                        <div class="sb-brand-role">Admin Panel</div>
+                    </div>
+                </div>
+
+                <nav class="sb-nav">
+                    <button class="sb-nav-btn active" data-view="dashboard">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="sb-nav-btn" data-view="all-tickets">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                        <span>All Tickets</span>
+                        <span class="sb-badge" id="admin-open-badge" style="display:none">0</span>
+                    </button>
+                    <button class="sb-nav-btn" data-view="resolved">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <span>Resolved & Ratings</span>
+                    </button>
+                    <button class="sb-nav-btn" data-view="knowledge-base">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                        <span>Knowledge Base</span>
+                    </button>
+                </nav>
+
+                <div class="sb-stats-box">
+                    <div class="sb-stats-label">OVERVIEW</div>
+                    <div class="sb-stats-row"><span class="sb-stats-key">Open</span><span class="sb-stats-val" style="color:var(--status-open)" id="as-open">0</span></div>
+                    <div class="sb-stats-row"><span class="sb-stats-key">In Progress</span><span class="sb-stats-val" style="color:var(--accent)" id="as-progress">0</span></div>
+                    <div class="sb-stats-row"><span class="sb-stats-key">Severe</span><span class="sb-stats-val" style="color:var(--severity-severe)" id="as-severe">0</span></div>
+                    <div class="sb-stats-row"><span class="sb-stats-key">Resolved</span><span class="sb-stats-val" style="color:var(--status-resolved)" id="as-resolved">0</span></div>
+                    <div class="sb-stats-row"><span class="sb-stats-key">Avg Rating</span><span class="sb-stats-val" style="color:var(--severity-moderate)" id="as-rating">—</span></div>
+                </div>
+
+                <div class="sb-bottom">
+
+                    <button class="btn btn-ghost sb-logout-btn" id="admin-logout-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Logout
+                    </button>
+                </div>
+            </aside>
+
+            <div class="sidebar-overlay" id="admin-sidebar-overlay"></div>
+            <!-- Admin Main Area -->
+            <div class="main-area">
+                <header class="topbar" id="admin-topbar">
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <button class="sidebar-toggle" id="admin-sidebar-toggle">☰</button>
+                        <h1 class="page-title" id="admin-page-title">Dashboard</h1>
+                    </div>
+                    <div class="filter-row" id="admin-filters" style="display:none">
+                        <input type="text" id="admin-search" class="search-box" placeholder="Search…">
+                        <select id="admin-filter-status" class="filter-sel">
+                            <option value="all">All Status</option>
+                            <option value="Open">Open</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Resolved">Resolved</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                        <select id="admin-filter-severity" class="filter-sel">
+                            <option value="all">All Severity</option>
+                            <option value="Severe">Severe</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <select id="admin-filter-dept" class="filter-sel">
+                            <option value="all">All Departments</option>
+                            <option value="Executive">Executive</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="I-Wallet">I-Wallet</option>
+                            <option value="Admin">Admin</option>
+                            <option value="I-Tech">I-Tech</option>
+                            <option value="Joint Ventures">Joint Ventures</option>
+                            <option value="IT">IT</option>
+                            <option value="Customer Care">Customer Care</option>
+                            <option value="Secretary">Secretary</option>
+                            <option value="Real Estate">Real Estate</option>
+                            <option value="Corporate">Corporate</option>
+                        </select>
+                    </div>
+                </header>
+                <div class="content-area" id="admin-content">
+                    <!-- Dynamically rendered -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== NEW TICKET MODAL ==================== -->
+    <div class="modal-overlay" id="ticket-modal">
+        <div class="modal glass-card">
+            <div class="modal-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Submit New Ticket
+                </h3>
+                <button class="modal-close" id="close-modal-btn">&times;</button>
+            </div>
+            <form id="ticket-form">
+                <div class="form-group">
+                    <label for="ticket-title">Title <span class="required">*</span></label>
+                    <input type="text" id="ticket-title" placeholder="Brief summary of the issue" required>
+                </div>
+                <div class="form-group">
+                    <label for="ticket-department">Department <span class="required">*</span></label>
+                    <select id="ticket-department" required>
+                        <option value="" disabled selected>Select your department</option>
+                        <option value="Executive">Executive</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="I-Wallet">I-Wallet</option>
+                        <option value="Admin">Admin</option>
+                        <option value="I-Tech">I-Tech</option>
+                        <option value="Joint Ventures">Joint Ventures</option>
+                        <option value="IT">IT</option>
+                        <option value="Customer Care">Customer Care</option>
+                        <option value="Secretary">Secretary</option>
+                        <option value="Real Estate">Real Estate</option>
+                        <option value="Corporate">Corporate</option>
+                        <option value="other">Other (specify below)</option>
+                    </select>
+                </div>
+                <div class="form-group" id="custom-dept-group" style="display:none">
+                    <label for="ticket-custom-department">Specify Department <span class="required">*</span></label>
+                    <input type="text" id="ticket-custom-department" placeholder="Enter your department name">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ticket-severity">Severity <span class="required">*</span></label>
+                        <select id="ticket-severity" required>
+                            <option value="" disabled selected>Select severity</option>
+                            <option value="Low">Low — Minor issue</option>
+                            <option value="Moderate">Moderate — Needs attention</option>
+                            <option value="Severe">Severe — Critical, immediate</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ticket-category">Category</label>
+                        <select id="ticket-category">
+                            <option value="Software">Software</option>
+                            <option value="Hardware">Hardware</option>
+                            <option value="Network">Network</option>
+                            <option value="Access">Access</option>
+                            <option value="Email">Email</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ticket-description">Description <span class="required">*</span></label>
+                    <textarea id="ticket-description" rows="5" placeholder="Describe your issue in detail..."
+                        required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ticket-file">Attachment (Optional)</label>
+                    <input type="file" id="ticket-file" style="width:100%;padding:10px;background:rgba(255,255,255,0.05);border-radius:6px;color:#ccc;border:1px solid rgba(255,255,255,0.1)">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" id="cancel-modal-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submit-ticket-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 2L11 13" />
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" />
+                        </svg>
+                        <span>Submit Ticket</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== VIEW TICKET MODAL ==================== -->
+    <div class="modal-overlay" id="view-ticket-modal">
+        <div class="modal glass-card modal-view">
+            <div class="modal-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    Ticket Details
+                </h3>
+                <button class="modal-close" id="close-view-modal-btn">&times;</button>
+            </div>
+            <div id="view-modal-body">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== RATING MODAL ==================== -->
+    <div class="modal-overlay" id="rating-modal">
+        <div class="modal glass-card modal-rating">
+            <div class="modal-header">
+                <h3>⭐ Rate Support Service</h3>
+                <button class="modal-close" id="close-rating-modal-btn">&times;</button>
+            </div>
+            <div id="rating-modal-body" style="padding:20px">
+                <p style="color:var(--text-secondary);font-size:14px;margin:0 0 16px">How would you rate the support you received?</p>
+                <div id="rating-stars" style="display:flex;gap:4px;justify-content:center;margin-bottom:16px">
+                    <!-- Stars populated by JS -->
+                </div>
+                <div class="form-group">
+                    <label for="rating-comment">Comment (Optional)</label>
+                    <textarea id="rating-comment" rows="3" placeholder="Tell us about your experience..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" id="rating-cancel">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="rating-submit">Submit Rating</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ARTICLE MODAL ==================== -->
+    <div class="modal-overlay" id="article-modal">
+        <div class="modal glass-card">
+            <div class="modal-header">
+                <h3 id="article-modal-title">Create Article</h3>
+                <button class="modal-close" id="close-article-modal-btn">&times;</button>
+            </div>
+            <form id="article-form">
+                <input type="hidden" id="article-id">
+                <div class="form-group">
+                    <label for="article-title">Title <span class="required">*</span></label>
+                    <input type="text" id="article-title" placeholder="Article Title" required>
+                </div>
+                <div class="form-group">
+                    <label for="article-category">Category</label>
+                    <input type="text" id="article-category" placeholder="e.g. FAQ, Windows, Network" required>
+                </div>
+                <div class="form-group">
+                    <label for="article-content">Content <span class="required">*</span></label>
+                    <textarea id="article-content" rows="8" placeholder="Article text content..." required></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" id="cancel-article-modal-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Article</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for (let registration of registrations) {
+                    registration.unregister();
+                }
+            });
+        }
+    </script>
+    <script src="/hexagon-bg.js"></script>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
